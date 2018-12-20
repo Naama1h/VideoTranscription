@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+	
+	<servlet>
+        <servlet-name>VTServlet</servlet-name>
+        <servlet-class>VTServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VTServlet</servlet-name>
+        <url-pattern>/Upload.jsp</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>HomePage.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
