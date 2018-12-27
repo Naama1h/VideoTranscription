@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
@@ -42,7 +44,7 @@ public class VTServlet extends HttpServlet {
 		
 //		PrintWriter out = response.getWriter();
 //		out.println("Hello World, Naama");
-		response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
+		//response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
 	}
 
 	private final String UPLOAD_DIRECTORY = "C:\\Users\\naama\\workspace\\VideoTranscription\\files";
@@ -51,10 +53,17 @@ public class VTServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//process only if its multipart content
+		
+//		PrintWriter out = response.getWriter();
+//
 //		if(ServletFileUpload.isMultipartContent(request)){
+//			FileItemFactory itemFactory = new DiskFileItemFactory();
+//			ServletFileUpload upload = new ServletFileUpload(itemFactory);
 //			try {
-//				List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(new ServletRequestContext(request));
-//				for(FileItem item : multiparts){
+//				List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
+//				for (FileItem item : items) {
+//					String contentType = item.getContentType();
+//					
 //					if(!item.isFormField()){
 //						String name = new File(item.getName()).getName();
 //						item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
@@ -65,10 +74,10 @@ public class VTServlet extends HttpServlet {
 //			} catch (Exception ex) {
 //				request.setAttribute("message", "File Upload Failed due to " + ex);
 //			}         
-//	    }else{
+//	    } else {
 //	    	request.setAttribute("message","Sorry this Servlet only handles file upload request");
 //	    }
-//		request.getRequestDispatcher("/Upload.jsp").forward(request, response);
+		//request.getRequestDispatcher("/Upload.jsp").forward(request, response);
 	}
 
 }
