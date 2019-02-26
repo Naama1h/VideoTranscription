@@ -5,18 +5,18 @@
 	</welcome-file-list>
 	<servlet>
 		<display-name>VTServlet</display-name>
-        <servlet-name>VTServlet</servlet-name>
-        <servlet-class>servlet.VTServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>VTServlet</servlet-name>
-        <url-pattern>/VTServlet</url-pattern>
-    </servlet-mapping>
+		<servlet-name>VTServlet</servlet-name>
+		<servlet-class>servlet.VTServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VTServlet</servlet-name>
+		<url-pattern>/VTServlet</url-pattern>
+	</servlet-mapping>
 
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+	<session-config>
+		<session-timeout>
+			30
+		</session-timeout>
+	</session-config>
 
 </web-app>

@@ -1,47 +1,49 @@
-<%@ page import="servlet.FileReader" language="java" contentType="text/html; charset=windows-1255"
-    pageEncoding="windows-1255"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="servlet.FileReader"%>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
-		<title>Video Transcription</title>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1255">
+<title>Video Transcription</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	</head>
-	<body>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+	<div>
+		<p align="center">
+			<font face="verdana" color="green">Choose file to upload in
+				server</font>
+		</p>
+
 		<div>
-			<p align="center"><font face="verdana" color="green">Choose file to upload in server</font></p>
-			
-			<div>
-				<input type="file" name="file" id="file"/>
-				<button type="submit" value="Upload" name="submit" id="submit" onclick="upload()">Load</button>
-			</div>
-			
-			<embed id="audioF" src=""
-			loop="1"
-			height="200"
-			width="500"
+			<input type="file" name="file" id="file" />
+			<button type="submit" value="Upload" name="submit" id="submit"
+				onclick="upload()">Load</button>
+		</div>
+
+		<embed id="audioF" src="" loop="1" height="200" width="500"
 			autostart="false">
-			</embed>
+		</embed>
 
 		<div>
-			<textarea rows="10" cols="2" id="treanscriptionText" style="width:100%;">try</textarea>
-			
+			<textarea rows="10" cols="2" id="treanscriptionText"
+				style="width: 100%;"></textarea>
+
 			<!--  <div id="docRow" class="row top20 proBg">
                 <div class="col-lg-12">-->
 
-            <div id="docNameWrapper" class="dropdown pro">
-                <button id="docSaveButton" type="button" class="btn btn-primary" data-toggle="tooltip"
-                        onclick="openASavedDoc()">
-                	<i class="fa fa-floppy-o"></i>  Open a saved document
-                </button>
-                      
-                <button id="docSaveButton" type="button" class="btn btn-primary" data-toggle="tooltip"
-                        onclick="registerPopup()">
-                	<i class="fa fa-floppy-o"></i>  Save
-                </button>
-            </div>
-			
+			<div id="docNameWrapper" class="dropdown pro">
+				<button id="docSaveButton" type="button" class="btn btn-primary"
+					data-toggle="tooltip" onclick="openASavedDoc()">
+					<i class="fa fa-floppy-o"></i> Open a saved document
+				</button>
+
+				<button id="docSaveButton" type="button" class="btn btn-primary"
+					data-toggle="tooltip" onclick="registerPopup()">
+					<i class="fa fa-floppy-o"></i> Save
+				</button>
+			</div>
+
 		</div>
 		<script type="text/javascript">
 			function upload() {
@@ -54,10 +56,26 @@
 			}
 			
 			function openASavedDoc() {
-				var fileConverter = new FileReader();
-				document.write("line2");
-				document.getElementById('treanscriptionText').value = "";
-				//document.write("in openASavedDoc");
+				//var imports = new JavaImporter(java.io.File, java.io.FileInputStream, java.util.List,
+				//		org.apache.poi.xwpf.usermodel.XWPFDocument, org.apache.poi.xwpf.usermodel.XWPFParagraph);
+				//with(imports) {
+				//	var file = new File(path);
+		        //    var fis = new FileInputStream(file.getAbsolutePath());
+		        //    var document = new XWPFDocument(fis);
+		        //    List<XWPFParagraph> paragraphs = document.getParagraphs();
+		        //    String text = "";
+
+		        //    for (var para in paragraphs) {
+		        //        text = text + para.getText() + "\n";
+		        //    }
+		        //    fis.close();
+				//}
+				
+				//var str = FileReaderTry.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
+				//document.getElementById('treanscriptionText').value = FileReaderTry.nisaion();
+				document.getElementById('treanscriptionText').value = FileReader.nisaion();
+				
+				
 				//var doc = new ActiveXObject("Word.Application"); // creates the word object
 				//doc.Visible=false; // doesn't display Word window
 				//doc.Documents.Open("C:\\Users\\naama\\workspace\\VideoTranscription\\try.docx"); // specify path to document
@@ -139,5 +157,5 @@
 			}
 
 		</script>
-	</body>
+</body>
 </html>

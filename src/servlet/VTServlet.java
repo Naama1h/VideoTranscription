@@ -44,7 +44,7 @@ public class VTServlet extends HttpServlet {
 		
 //		PrintWriter out = response.getWriter();
 //		out.println("Hello World, Naama");
-//		response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
+		response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
 	}
 
 	private final String UPLOAD_DIRECTORY = "C:\\Users\\naama\\workspace\\VideoTranscription\\files";
