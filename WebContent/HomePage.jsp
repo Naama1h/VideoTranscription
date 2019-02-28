@@ -1,4 +1,4 @@
-<%@ page import="servlet.FileReader"%>
+<%@ page import="servlet.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type"
@@ -45,6 +45,14 @@
 			</div>
 
 		</div>
+		<script src= "https://www.java.com/js/deployJava.js"></script>
+		<script>
+    		<!-- applet id can be used to get a reference to the applet object -->
+    		var attributes = { id:'fileReaderApplet',
+       			code:'servlet.FileReaderApplet',  width:1, height:1} ;
+    		var parameters = { jnlp_href: 'file_reader_applet.jnlp'} ;
+    		deployJava.runApplet(attributes, parameters, '1.6');
+		</script>
 		<script type="text/javascript">
 			function upload() {
 				// upload the file
@@ -56,35 +64,10 @@
 			}
 			
 			function openASavedDoc() {
-				//var imports = new JavaImporter(java.io.File, java.io.FileInputStream, java.util.List,
-				//		org.apache.poi.xwpf.usermodel.XWPFDocument, org.apache.poi.xwpf.usermodel.XWPFParagraph);
-				//with(imports) {
-				//	var file = new File(path);
-		        //    var fis = new FileInputStream(file.getAbsolutePath());
-		        //    var document = new XWPFDocument(fis);
-		        //    List<XWPFParagraph> paragraphs = document.getParagraphs();
-		        //    String text = "";
-
-		        //    for (var para in paragraphs) {
-		        //        text = text + para.getText() + "\n";
-		        //    }
-		        //    fis.close();
-				//}
-				
-				//var str = FileReaderTry.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
-				//document.getElementById('treanscriptionText').value = FileReaderTry.nisaion();
-				document.getElementById('treanscriptionText').value = FileReader.nisaion();
-				
-				
-				//var doc = new ActiveXObject("Word.Application"); // creates the word object
-				//doc.Visible=false; // doesn't display Word window
-				//doc.Documents.Open("C:\\Users\\naama\\workspace\\VideoTranscription\\try.docx"); // specify path to document
-				//copy the content from my word document and throw it into my variable
-				//var txt;
-				//txt = doc.Documents("C:\\Users\\naama\\workspace\\VideoTranscription\\try.docx").Content; 
-				//document.all.myarea.value = txt;
-				//doc.quit(0); // quit word (very important or you'll quickly chew up memory!
-				//document.write("in openASavedDoc");
+				//document.getElementById('treanscriptionText').value = "hi";
+				//var str = FileReader.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
+				var fileReader = fileReaderApplet.getFileReader();
+				document.getElementById('treanscriptionText').value = fileReader.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
 			};
 				
 			function registerPopup() {
@@ -157,5 +140,6 @@
 			}
 
 		</script>
+	</div>
 </body>
 </html>
