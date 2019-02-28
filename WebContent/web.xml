@@ -4,13 +4,13 @@
 		<welcome-file>HomePage.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
-		<display-name>VTServlet</display-name>
-		<servlet-name>VTServlet</servlet-name>
-		<servlet-class>servlet.VTServlet</servlet-class>
+		<display-name>FRServlet</display-name>
+		<servlet-name>FRServlet</servlet-name>
+		<servlet-class>servlet.FRServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>VTServlet</servlet-name>
-		<url-pattern>/VTServlet</url-pattern>
+		<servlet-name>FRServlet</servlet-name>
+		<url-pattern>/FRServlet</url-pattern>
 	</servlet-mapping>
 
 	<session-config>

@@ -31,6 +31,13 @@
 
 			<!--  <div id="docRow" class="row top20 proBg">
                 <div class="col-lg-12">-->
+                
+         <div>
+         <form id="uploadwordfile" action="FRServlet" method="post">
+         	<input type="file" name="wordfile" id="wordfile" />
+			<input type="submit" />
+         </form>
+		</div>
 
 			<div id="docNameWrapper" class="dropdown pro">
 				<button id="docSaveButton" type="button" class="btn btn-primary"
@@ -45,14 +52,6 @@
 			</div>
 
 		</div>
-		<script src= "https://www.java.com/js/deployJava.js"></script>
-		<script>
-    		<!-- applet id can be used to get a reference to the applet object -->
-    		var attributes = { id:'fileReaderApplet',
-       			code:'servlet.FileReaderApplet',  width:1, height:1} ;
-    		var parameters = { jnlp_href: 'file_reader_applet.jnlp'} ;
-    		deployJava.runApplet(attributes, parameters, '1.6');
-		</script>
 		<script type="text/javascript">
 			function upload() {
 				// upload the file
@@ -63,11 +62,46 @@
 				audio.parentNode.replaceChild(clone,audio)
 			}
 			
+			$(document).on("submit", "#uploadwordfile", function(event) {
+			    var $form = $(this);
+			    $.post($form.attr("action"), $form.serialize(), function(response) {
+			    	document.write("in seccess");
+					if(response != "badPath" && response != null) {
+						document.getElementById('treanscriptionText').value = "response";
+					} else {
+						alert('invalid file');
+					}
+			    });
+			    event.preventDefault();
+			});
+			
+			//$(document).ready(function(){
+			//	$('#uploadwordfile').submit(function() {
+			//		document.write("in upload");
+			//		$.ajax({
+			//			url: 'FRServlet',
+			//			type: 'POST',
+			//			dataType: 'json',
+			//			data: $('#uploadwordfile').serialize(),
+			//			success: function(data){
+			//				document.write("in seccess");
+			//				if(data != "badPath" && data != null) {
+			//					document.getElementById('treanscriptionText').value = "data";
+			//				} else {
+			//					alert('invalid file');
+			//				}
+			//			}
+			//		});
+			//		document.write("end ajax");
+			//		return false;
+			//	});
+			//});
+			
 			function openASavedDoc() {
 				//document.getElementById('treanscriptionText').value = "hi";
 				//var str = FileReader.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
-				var fileReader = fileReaderApplet.getFileReader();
-				document.getElementById('treanscriptionText').value = fileReader.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
+				//var fileReader = fileReaderApplet.getFileReader();
+				//document.getElementById('treanscriptionText').value = fileReader.getText("C:\\Users\\User\\git\\VideoTranscription\\try.docx");
 			};
 				
 			function registerPopup() {

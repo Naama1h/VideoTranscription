@@ -13,15 +13,13 @@ public class FileReader {
 	
 	public static String getText(String path) {
 		try {
-			System.out.println("begin");
+			System.out.println("enter function");
             File file = new File(path);
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-            System.out.println("start");
             XWPFDocument document = new XWPFDocument(fis);
 
             List<XWPFParagraph> paragraphs = document.getParagraphs();
             String text = "";
-            System.out.println("perse");
             for (XWPFParagraph para : paragraphs) {
                 text = text + para.getText() + "\n";
             }
@@ -31,7 +29,7 @@ public class FileReader {
             return text;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return "badPath";
         }
 	}
 
