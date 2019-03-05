@@ -11,8 +11,7 @@
 <body>
 	<div>
 		<p align="center">
-			<font face="verdana" color="green">Choose file to upload in
-				server</font>
+			<font face="verdana" color="green">Choose file to upload in server</font>
 		</p>
 
 		<div>
@@ -33,7 +32,7 @@
                 <div class="col-lg-12">-->
                 
          <div>
-         <form id="uploadwordfile" action="FRServlet" method="post">
+         <form id="uploadwordfile" action="FRServlet" method="post" onsubmit="uploudTestFromWordFile()">
          	<input type="file" name="wordfile" id="wordfile" />
 			<input type="submit" />
          </form>
@@ -50,6 +49,8 @@
 					<i class="fa fa-floppy-o"></i> Save
 				</button>
 			</div>
+			
+			<p hidden id="hiddenP"><%= request.getAttribute("data") %>.</p>
 
 		</div>
 		<script type="text/javascript">
@@ -62,18 +63,38 @@
 				audio.parentNode.replaceChild(clone,audio)
 			}
 			
-			$(document).on("submit", "#uploadwordfile", function(event) {
-			    var $form = $(this);
+			//$('#uploadwordfile').submit(function(event)) {
+				//completeForm($(this));
+				//document.write("in func");
+			//}
+			//$(document).on("submit", "#uploadwordfile", function(event) {
+			function completeForm($form) {
+				document.write("in func");
+				//var $form = $(this);
+			    
 			    $.post($form.attr("action"), $form.serialize(), function(response) {
-			    	document.write("in seccess");
-					if(response != "badPath" && response != null) {
+			    	document.write("in success");
+					if((response != "badPath") && (response != null)) {
 						document.getElementById('treanscriptionText').value = "response";
 					} else {
 						alert('invalid file');
 					}
 			    });
 			    event.preventDefault();
-			});
+			};
+			
+			function uploudTestFromWordFile() {
+			    	//var text = request.getAttribute("data");
+			    	//while (document.getElementById('hiddenP').value == "undefined") {};
+			    	var text = document.getElementById('hiddenP').value;
+			    	document.write(String(text));
+			    	document.write(session.getAttribute("textData"));
+					if((response != "badPath") && (response != null)) {
+						document.getElementById('treanscriptionText').value = "response";
+					} else {
+						alert('invalid file');
+					}
+			}
 			
 			//$(document).ready(function(){
 			//	$('#uploadwordfile').submit(function() {

@@ -1,11 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import sun.net.www.http.HttpClient;
 
 /**
  * Servlet implementation class FRServlet
@@ -20,7 +26,7 @@ public class FRServlet extends HttpServlet {
     public FRServlet() {
         super();
     }
-	private static final String thisPath="C:\\Users\\User\\git\\VideoTranscription"; 
+	private static final String thisPath="C:\\Users\\naama\\workspace\\VideoTranscription"; 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,8 +47,23 @@ public class FRServlet extends HttpServlet {
 		} else {
 			text = "badPath";
 		}
+		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(text);
+		
+		//PrintWriter out = response.getWriter();
+		System.out.println("after set request");
+		//out.append("<p value='try1' />");
+		//out.append(text);
+//		out.close();
+		request.setAttribute("data", text);
+
+		//out.write(text);
+		System.out.println("after out.write");
+		//out.append((String)request.getAttribute("data"));
+        request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
+        System.out.println("end of function post");
+		//response.setCharacterEncoding(text);
+		//response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
 	}
 }
