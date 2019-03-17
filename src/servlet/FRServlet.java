@@ -31,7 +31,16 @@ public class FRServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
+		//response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
+		String text = request.getParameter("treanscriptionText");
+		String path = "C:\\Users\\User\\git\\VideoTranscription\\doc";
+		FileReader fr = new FileReader();
+		fr.saveText(path, text);
+		System.out.println(text);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		request.setAttribute("data", text);
+		request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
 	}
 
 	/**

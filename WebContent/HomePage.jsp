@@ -1,8 +1,7 @@
 <%@ page import="servlet.*"%>
-<html>
+<html dir="rtl">
 <head>
-<meta http-equiv="Content-Type"
-	content="text/html; charset=windows-1255">
+<meta charset="utf-8">
 <title>Video Transcription</title>
 
 <meta name="viewport"
@@ -25,11 +24,21 @@
 		</embed>
 
 		<div>
-			<textarea rows="10" cols="2" id="treanscriptionText"
-				style="width: 100%;"></textarea>
+			<form action="FRServlet" method="get">
+				<textarea rows="10" cols="2" id="treanscriptionText"
+				name="treanscriptionText" style="width: 100%;"></textarea>
+				<input type="submit" value="save"/>
+			</form>
 
 			<!--  <div id="docRow" class="row top20 proBg">
                 <div class="col-lg-12">-->
+<<<<<<< HEAD
+
+         	<form id="uploadwordfile" action="FRServlet" method="post">
+         		<input type="file" name="wordfile" id="wordfile" />
+				<input type="submit" value="open"/>
+        	</form>
+=======
                 
          <div>
          <form id="uploadwordfile" action="FRServlet" method="post" onsubmit="uploudTestFromWordFile()">
@@ -37,6 +46,7 @@
 			<input type="submit" />
          </form>
 		</div>
+>>>>>>> refs/remotes/origin/master
 
 			<div id="docNameWrapper" class="dropdown pro">
 				<button id="docSaveButton" type="button" class="btn btn-primary"
@@ -50,7 +60,17 @@
 				</button>
 			</div>
 			
+<<<<<<< HEAD
+			<!-- <div>
+				<B> tag :</b> <span id="name"></span><br>
+				<b> symbol :</B> <span id="symbol"></span><br>
+			</div>  -->
+			
+			<textarea hidden rows="10" cols="2" id="hiddenP"
+				style="width: 100%;"><%= request.getAttribute("data") %></textarea>
+=======
 			<p hidden id="hiddenP"><%= request.getAttribute("data") %>.</p>
+>>>>>>> refs/remotes/origin/master
 
 		</div>
 		<script type="text/javascript">
@@ -84,6 +104,18 @@
 			};
 			
 			function uploudTestFromWordFile() {
+<<<<<<< HEAD
+			    //var text = request.getAttribute("data");
+			    //while (document.getElementById('hiddenP').value == "undefined") {};
+			    var text = document.getElementById('hiddenP').value;
+				if((text != "badPath") && (text != "null")) {
+					document.getElementById('treanscriptionText').value = text;
+				} else if(text != "null") {
+					alert('invalid file');
+				}
+			}
+			uploudTestFromWordFile();
+=======
 			    	//var text = request.getAttribute("data");
 			    	//while (document.getElementById('hiddenP').value == "undefined") {};
 			    	var text = document.getElementById('hiddenP').value;
@@ -95,6 +127,7 @@
 						alert('invalid file');
 					}
 			}
+>>>>>>> refs/remotes/origin/master
 			
 			//$(document).ready(function(){
 			//	$('#uploadwordfile').submit(function() {
@@ -142,7 +175,6 @@
 				    //downloadLink.style.display = "none";
 				    //document.body.appendChild(downloadLink);
 				//}
-
 				//downloadLink.click();
 				//document.write("in registerPopup");
 				
@@ -180,20 +212,29 @@
 			        downloadLink.style.display = "none";
 			        document.body.appendChild(downloadLink);
 			    }
-
 			    downloadLink.click();
 			    //document.write("in registerPopup");
 			}
 			
 			var button = document.getElementById('docSaveButton');
 			button.addEventListener('click', registerPopup);
-
 			function destroyClickedElement(event) {
 			    // remove the link from the DOM
 			    document.body.removeChild(event.target);
 			    //document.write("in destroyClickedElement");
 			}
-
+			
+			// נסיון להכניס תגית מהאקסמל
+			//if(window.XMLHttpRequest) {
+			//	xmlhttp = new XMLHttpRequest();
+			//} else {
+			//	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			//}
+			//xmlhttp.open("GET","tags.xml",false);
+			//xmlhttp.send();
+			//xmlDoc = xmlhttp.responseXML();
+			//document.getElementById('name').innerHTML= xmlDoc.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+			//document.getElementById('symbol').innerHTML= xmlDoc.getElementsByTagName("symbol")[0].childNodes[0].nodeValue;
 		</script>
 	</div>
 </body>
