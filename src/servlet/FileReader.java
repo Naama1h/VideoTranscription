@@ -10,10 +10,9 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 public class FileReader {
-
+	
 	public String getText(String path) {
 		try {
-			System.out.println("enter function");
             File file = new File(path);
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
             XWPFDocument document = new XWPFDocument(fis);
@@ -27,6 +26,8 @@ public class FileReader {
             document.close();
             System.out.println(text);
             return text;
+		} catch (org.apache.poi.EmptyFileException e1) {
+			return "";
         } catch (Exception e) {
             e.printStackTrace();
             return "badPath";
@@ -40,7 +41,7 @@ public class FileReader {
 		tmpRun.setText(text);
 		tmpRun.setFontSize(12);
 		try {
-			document.write(new FileOutputStream(new File(path+".docx")));
+			document.write(new FileOutputStream(new File(path)));
 			document.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

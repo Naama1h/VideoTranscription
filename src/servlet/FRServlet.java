@@ -26,19 +26,22 @@ public class FRServlet extends HttpServlet {
     public FRServlet() {
         super();
     }
-	private static final String thisPath="C:\\Users\\naama\\workspace\\VideoTranscription"; 
+	private static final String thisPath="C:\\Users\\naama\\workspace\\VideoTranscription";
+	private String path = "";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
-		String text = request.getParameter("treanscriptionText");
-		String path = "C:\\Users\\User\\git\\VideoTranscription\\doc";
+		//request.setCharacterEncoding("UTF-8");
+
+		String text = request.getParameter("transcriptionText");
+		System.out.println(request.getParameter("nisaion"));
+		System.out.println(text);
 		FileReader fr = new FileReader();
 		fr.saveText(path, text);
-		System.out.println(text);
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/plain");
+		//response.setCharacterEncoding("UTF-8");
+		
 		request.setAttribute("data", text);
 		request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
 	}
@@ -47,32 +50,19 @@ public class FRServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("post");
 		String text;
 		FileReader fr = new FileReader();
-		String fileName = request.getParameter("wordfile");
-		if (fileName != null) {
-			text = fr.getText(fileName);
+		request.setCharacterEncoding("UTF-8");
+		path = request.getParameter("wordfile");
+		if (path != null) {
+			text = fr.getText(path);
 		} else {
 			text = "badPath";
 		}
 		
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
-		
-		//PrintWriter out = response.getWriter();
-		System.out.println("after set request");
-		//out.append("<p value='try1' />");
-		//out.append(text);
-//		out.close();
+//		response.setContentType("text/plain");
+//		response.setCharacterEncoding("UTF-8");
 		request.setAttribute("data", text);
-
-		//out.write(text);
-		System.out.println("after out.write");
-		//out.append((String)request.getAttribute("data"));
         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
-        System.out.println("end of function post");
-		//response.setCharacterEncoding(text);
-		//response.sendRedirect(thisPath + "\\WebContent\\HomePage.jsp");
 	}
 }
