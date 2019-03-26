@@ -41,10 +41,9 @@
 				<input type="submit" value="open"/>
         	</form>
                 			
-			<!-- <div>
-				<B> tag :</b> <span id="name"></span><br>
-				<b> symbol :</B> <span id="symbol"></span><br>
-			</div>  -->
+			<div>
+				<p id="symbol">Symbol</p>
+			</div>
 			
 			<textarea hidden rows="10" cols="2" id="hiddenP"
 				style="width: 100%;"><%= request.getAttribute("data") %></textarea>
@@ -70,7 +69,33 @@
 			}
 			uploudTestFromWordFile();
 			
-			
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			    	openXmlOfTags(this);
+			    }
+			};
+			xhttp.open("GET", "tags.xml", true);
+			xhttp.send();
+
+			function openXmlOfTags(xml) {
+			    var x, i, xmlDoc, txt;
+			    xmlDoc = xml.responseXML;
+			    txt = "";
+			    symbols = xmlDoc.getElementsByTagName('symbol');
+			    for (i = 0 ; i <symbols.length; i++) {
+			        txt += symbols[i].childNodes[0].nodeValue + "<br>";
+			    }
+			    document.getElementById("symbol").innerHTML = txt;
+
+			    names = xmlDoc.getElementsByTagName('name');
+			    for (i = 0 ; i <names.length; i++) {
+			        var b = document.createElement("BUTTON");
+				    var t = document.createTextNode(names[i].childNodes[0].nodeValue);
+				    b.appendChild(t);
+				    document.body.appendChild(b);
+			    }
+			}
 		</script>
 	</div>
 </body>
