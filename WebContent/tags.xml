@@ -4,4 +4,8 @@
 		<name>צחוק</name>
 		<symbol>[ צוחק !=]</symbol>
 	</tag>
+	<tag>
+		<name>בכי</name>
+		<symbol>[ בוכה !=]</symbol>
+	</tag>
 </tags>
