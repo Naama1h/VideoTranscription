@@ -88,7 +88,7 @@
 				    document.body.appendChild(b);
 			    }
 			}
-			
+
 			function writeSymbol(symbol) {
 				document.getElementById('transcriptionText').value += symbol;
 			}
