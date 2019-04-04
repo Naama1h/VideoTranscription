@@ -28,6 +28,7 @@ public class FRServlet extends HttpServlet {
     }
 	private static final String thisPath="C:\\Users\\naama\\workspace\\VideoTranscription";
 	private String path = "";
+	private String password = "";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -35,10 +36,8 @@ public class FRServlet extends HttpServlet {
 		//request.setCharacterEncoding("UTF-8");
 
 		String text = request.getParameter("transcriptionText");
-		System.out.println(request.getParameter("nisaion"));
-		System.out.println(text);
 		FileReader fr = new FileReader();
-		fr.saveText(path, text);
+		fr.saveText(this.path, text, this.password);
 		//response.setContentType("text/plain");
 		//response.setCharacterEncoding("UTF-8");
 		
@@ -54,8 +53,9 @@ public class FRServlet extends HttpServlet {
 		FileReader fr = new FileReader();
 		request.setCharacterEncoding("UTF-8");
 		path = request.getParameter("wordfile");
+		this.password = request.getParameter("password");
 		if (path != null) {
-			text = fr.getText(path);
+			text = fr.getText(path,this.password);
 		} else {
 			text = "badPath";
 		}

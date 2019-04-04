@@ -40,6 +40,7 @@
 
          	<form id="uploadwordfile" action="FRServlet" method="post">
          		<input type="file" name="wordfile" id="wordfile" />
+         		<input type="text" name="password" id="password" value="הכנס סיסמא">
 				<input type="submit" value="open"/>
         	</form>
 			
