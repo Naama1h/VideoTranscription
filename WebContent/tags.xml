@@ -4,102 +4,114 @@
 		<name>צחוק</name>
 		<symbol>[!= צוחק ]</symbol>
 		<disable>false</disable>
+		<type>single</type>
 	</tag>
 	<tag>
 		<name>בכי</name>
 		<symbol>[!= בוכה ]</symbol>
 		<disable>false</disable>
+		<type>single</type>
 	</tag>
 	<tag>
 		<name>צעקה</name>
 		<symbol>[!= צועק ]</symbol>
 		<disable>false</disable>
+		<type>single</type>
 	</tag>
 	<tag>
 		<name>לחישה</name>
 		<symbol>[!= לוחש ]</symbol>
 		<disable>false</disable>
+		<type>single</type>
 	</tag>
 	<tag>
 		<name>שירה</name>
 		<symbol>[!= שר ]</symbol>
 		<disable>false</disable>
+		<type>single</type>
 	</tag>
 	<tag>
 		<name>מילה לא ברורה</name>
 		<symbol>XXX</symbol>
 		<disable>false</disable>
+		<type>single</type>
 	</tag>
 	<tag>
 		<name>תחילת חפיפה בין דוברים</name>
 		<symbol>[</symbol>
 		<disable>false</disable>
+		<type>open</type>
 		<opentag>סיום חפיפה בין דוברים</opentag>
 	</tag>
 	<tag>
 		<name>סיום חפיפה בין דוברים</name>
 		<symbol>]</symbol>
 		<disable>true</disable>
-		<closetag>תחילת חפיפה בין דוברים</closetag>
+		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת דיבור מהיר</name>
 		<symbol>&gt;</symbol>
 		<disable>false</disable>
+		<type>open</type>
 		<opentag>סיום דיבור מהיר</opentag>
 	</tag>
 	<tag>
 		<name>סיום דיבור מהיר</name>
 		<symbol>&lt;</symbol>
 		<disable>true</disable>
-		<closetag>תחילת דיבור מהיר</closetag>
+		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת דיבור איטי</name>
 		<symbol>&lt;</symbol>
 		<disable>false</disable>
+		<type>open</type>
 		<opentag>סיום דיבור איטי</opentag>
 	</tag>
 	<tag>
 		<name>סיום דיבור איטי</name>
 		<symbol>&gt;</symbol>
 		<disable>true</disable>
-		<closetag>תחילת דיבור איטי</closetag>
+		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת עוצמה גבוהה מהרגיל</name>
 		<symbol>^</symbol>
 		<disable>false</disable>
+		<type>open</type>
 		<opentag>סיום עוצמה גבוהה מהרגיל</opentag>
 	</tag>
 	<tag>
 		<name>סיום עוצמה גבוהה מהרגיל</name>
 		<symbol>^</symbol>
 		<disable>true</disable>
-		<closetag>תחילת עוצמה גבוהה מהרגיל</closetag>
+		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת עוצמה נמוכה מהרגיל</name>
 		<symbol>v</symbol>
 		<disable>false</disable>
+		<type>open</type>
 		<opentag>סיום עוצמה נמוכה מהרגיל</opentag>
 	</tag>
 	<tag>
 		<name>סיום עוצמה נמוכה מהרגיל</name>
 		<symbol>v</symbol>
 		<disable>true</disable>
-		<closetag>תחילת עוצמה נמוכה מהרגיל</closetag>
+		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת השלמת מילה חלקית</name>
 		<symbol>(</symbol>
 		<disable>false</disable>
+		<type>open</type>
 		<opentag>סיום השלמת מילה חלקית</opentag>
 	</tag>
 	<tag>
 		<name>סיום השלמת מילה חלקית</name>
 		<symbol>)</symbol>
 		<disable>true</disable>
-		<closetag>תחילת השלמת מילה חלקית</closetag>
+		<type>close</type>
 	</tag>
 </tags>

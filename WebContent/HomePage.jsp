@@ -1,3 +1,4 @@
+
 <%@ page import="servlet.*" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 
 <html dir="rtl">
@@ -67,7 +68,6 @@
 				}
 			}
 			uploudTestFromWordFile();
-			
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
@@ -82,13 +82,32 @@
 			    xmlDoc = xml.responseXML;
 			    symbols = xmlDoc.getElementsByTagName('symbol');
 			    names = xmlDoc.getElementsByTagName('name');
+			    types = xmlDoc.getElementsByTagName('type');
+			    opens = xmlDoc.getElementsByTagName('opentag');
+			    openIndex = 0;
 			    for (i = 0 ; i < names.length; i++) {
 			        var b = document.createElement("BUTTON");
 				    var t = document.createTextNode(names[i].childNodes[0].nodeValue);
 				    b.appendChild(t);
 			        b.setAttribute("id", symbols[i].childNodes[0].nodeValue);
-			      	b.onclick = function() {writeSymbol(this.getAttribute("id"))};
-				    document.body.appendChild(b);
+			        if (types[i].childNodes[0].nodeValue == "close") {
+			        	b.disabled = true;
+			        } else {
+			        	b.disabled = false;
+			        }
+			      	b.onclick = function() {
+			      		writeSymbol(this.getAttribute("id"));
+			      		if (types[i].childNodes[0].nodeValue == "open") {
+			      			console.log("in open");
+				        	updateDisable(opens[openIndex].childNodes[0].nodeValue,xml);
+				        } else if (types[i].childNodes[0].nodeValue == "close") {
+				        	updateDisable("restartDisable",xml);
+				        }
+			      	};
+			      	document.body.appendChild(b);
+			      	if (types[i].childNodes[0].nodeValue == "open") {
+			        	openIndex++;
+			        }
 			    }
 			}
 
@@ -114,6 +133,30 @@
 				//document.write(document.getElementById('audioF').currentTime);
 				document.write(document.getElementById('audioF').getAttribute("currentTime"));
 				//document.getElementById('audioF')
+			}
+			
+			function updateDisable(element, xml) {
+			    xmlDoc = xml.responseXML;
+			    symbols = xmlDoc.getElementsByTagName('symbol');
+			    types = xmlDoc.getElementsByTagName('type');
+				if (element == "restartDisable") {
+				    for (i = 0 ; i < symbols.length; i++) {
+					    if (types[i].childNodes[0].nodeValue == "close") {
+					    	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = true;
+				        } else {
+				        	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = false;
+				        }
+				    }
+				} else {
+				    names = xmlDoc.getElementsByTagName('name');
+				    for (i = 0 ; i < symbols.length; i++) {
+					    if (names[i].childNodes[0].nodeValue == element) {
+					    	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = false;
+				        } else {
+				        	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = true;
+				        }
+				    }
+				}
 			}
 
 		</script>
