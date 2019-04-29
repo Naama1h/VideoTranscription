@@ -90,22 +90,28 @@
 				    var t = document.createTextNode(names[i].childNodes[0].nodeValue);
 				    b.appendChild(t);
 			        b.setAttribute("id", symbols[i].childNodes[0].nodeValue);
-			        if (types[i].childNodes[0].nodeValue == "close") {
+			        type = types[i].childNodes[0].nodeValue;
+			        if (type == "close") {
 			        	b.disabled = true;
 			        } else {
 			        	b.disabled = false;
 			        }
 			      	b.onclick = function() {
 			      		writeSymbol(this.getAttribute("id"));
-			      		if (types[i].childNodes[0].nodeValue == "open") {
-			      			console.log("in open");
-				        	updateDisable(opens[openIndex].childNodes[0].nodeValue,xml);
-				        } else if (types[i].childNodes[0].nodeValue == "close") {
-				        	updateDisable("restartDisable",xml);
+			      		if (type == "open") {
+				        	updateDisable(opens[openIndex].childNodes[0].nodeValue,
+				        			xmlDoc.getElementsByTagName('symbol'),
+				        			xmlDoc.getElementsByTagName('name'),
+				        			xmlDoc.getElementsByTagName('type'));
+				        } else if (type == "close") {
+				        	updateDisable("restartDisable",
+				        			xmlDoc.getElementsByTagName('symbol'),
+				        			xmlDoc.getElementsByTagName('name'),
+				        			xmlDoc.getElementsByTagName('type'));
 				        }
 			      	};
 			      	document.body.appendChild(b);
-			      	if (types[i].childNodes[0].nodeValue == "open") {
+			      	if (type == "open") {
 			        	openIndex++;
 			        }
 			    }
@@ -125,7 +131,6 @@
 				el.value = before + newText + after;
 				el.selectionStart = el.selectionEnd = start + newText.length;
 				el.focus();
-				
 				return false
 			}
 			
@@ -135,10 +140,7 @@
 				//document.getElementById('audioF')
 			}
 			
-			function updateDisable(element, xml) {
-			    xmlDoc = xml.responseXML;
-			    symbols = xmlDoc.getElementsByTagName('symbol');
-			    types = xmlDoc.getElementsByTagName('type');
+			function updateDisable(element, symbols, names, types) {
 				if (element == "restartDisable") {
 				    for (i = 0 ; i < symbols.length; i++) {
 					    if (types[i].childNodes[0].nodeValue == "close") {
@@ -148,7 +150,6 @@
 				        }
 				    }
 				} else {
-				    names = xmlDoc.getElementsByTagName('name');
 				    for (i = 0 ; i < symbols.length; i++) {
 					    if (names[i].childNodes[0].nodeValue == element) {
 					    	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = false;
