@@ -27,6 +27,27 @@
 		</embed>
 		
 		<button id="videoTime" onclick="getAudioFCurrentTime()">get time </button>
+		<p>choose language for transcription</p>
+		<form>
+  			<select id="languageSelect">
+    			<option>English</option>
+    			<option>עברית</option>
+  			</select>
+		</form>
+		
+		<button onclick="setLanguage()">set language</button>
+
+		<p hidden id="language"></p>
+
+		<form>
+			<input type = "text" id="therapist" name="therapist" value="insert the therapist's name">
+			<input type = "text" id="patient" name="patient" value="insert the patient's name">
+		</form>
+		
+		<button onclick="setNames()">set names</button>
+
+		<p hidden id="therapistName"></p>
+		<p hidden id="patientName"></p>
 
 		<div>
 			<form action="FRServlet" method="get">
@@ -68,16 +89,35 @@
 				}
 			}
 			uploudTestFromWordFile();
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-			    if (this.readyState == 4 && this.status == 200) {
-			    	openXmlOfTags(this);
-			    }
-			};
-			xhttp.open("GET", "tags.xml", true);
-			xhttp.send();
+			//var xhttp = new XMLHttpRequest();
+			//xhttp.onreadystatechange = function() {
+			//    if (this.readyState == 4 && this.status == 200) {
+			//    	openXmlOfTags(this);
+			//    }
+			//};
+			//if (document.getElementById('language').innerHTML == "עברית") {
+			//	xhttp.open("GET", "tags.xml", true);
+			//} else if (document.getElementById('language').innerHTML == "English") {
+			//	xhttp.open("GET", "EnglishTags.xml", true);
+			//} else {
+			//	xhttp.open("GET", "tags.xml", true);
+			//}
+			//xhttp.send();
+			
+			function checkIfButtonsAreExist() {
+				if (document.getElementById('0') != null) {
+					//document.write('here');
+					var i = 0;
+					while (document.getElementById(i) != null) {
+						var elem = document.getElementById(i);
+						elem.parentNode.removeChild(elem);
+						i++;
+					}
+				}
+			}
 
 			function openXmlOfTags(xml) {
+				checkIfButtonsAreExist();
 			    var x, i, xmlDoc, txt;
 			    xmlDoc = xml.responseXML;
 			    symbols = xmlDoc.getElementsByTagName('symbol');
@@ -89,7 +129,8 @@
 			        var b = document.createElement("BUTTON");
 				    var t = document.createTextNode(names[i].childNodes[0].nodeValue);
 				    b.appendChild(t);
-			        b.setAttribute("id", symbols[i].childNodes[0].nodeValue);
+			        b.setAttribute("name", symbols[i].childNodes[0].nodeValue);
+			        b.setAttribute("id", i);
 			        type = types[i].childNodes[0].nodeValue;
 			        if (type == "close") {
 			        	b.disabled = true;
@@ -97,7 +138,7 @@
 			        	b.disabled = false;
 			        }
 			      	b.onclick = function() {
-			      		writeSymbol(this.getAttribute("id"));
+			      		writeSymbol(this.getAttribute("name"));
 			      		if (type == "open") {
 				        	updateDisable(opens[openIndex].childNodes[0].nodeValue,
 				        			xmlDoc.getElementsByTagName('symbol'),
@@ -160,6 +201,33 @@
 				}
 			}
 
+			function setLanguage() {
+				var x = document.getElementById("languageSelect");
+				var i = x.selectedIndex;
+				document.getElementById("language").innerHTML = x.options[i].text;
+				
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+				    	openXmlOfTags(this);
+				    }
+				};
+				if (document.getElementById('language').innerHTML == "עברית") {
+					xhttp.open("GET", "tags.xml", true);
+				} else if (document.getElementById('language').innerHTML == "English") {
+					xhttp.open("GET", "EnglishTags.xml", true);
+				} else {
+					xhttp.open("GET", "tags.xml", true);
+				}
+				xhttp.send();
+			}
+			
+			function setNames() {
+				var t = document.getElementById("therapist").value;
+				var p = document.getElementById("patient").value;
+				document.getElementById("therapistName").innerHTML = t;
+				document.getElementById("patientName").innerHTML = p;
+			}
 		</script>
 	</div>
 </body>
