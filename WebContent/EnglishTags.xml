@@ -1,140 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tags>
 	<tag>
-		<name>אחר</name>
-		<symbol>[!= הכנס פה ]</symbol>
+		<name>else</name>
+		<symbol>[!= insert here ]</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>צחוק</name>
-		<symbol>[!= צוחק ]</symbol>
+		<name>laugh</name>
+		<symbol>[!= laugh ]</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>בכי</name>
-		<symbol>[!= בוכה ]</symbol>
+		<name>cry</name>
+		<symbol>[!= cry ]</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>צעקה</name>
-		<symbol>[!= צועק ]</symbol>
+		<name>scream</name>
+		<symbol>[!= scream ]</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>לחישה</name>
-		<symbol>[!= לוחש ]</symbol>
+		<name>whisper</name>
+		<symbol>[!= whisper ]</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>שירה</name>
-		<symbol>[!= שר ]</symbol>
+		<name>sing</name>
+		<symbol>[!= sing ]</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>מילה לא ברורה</name>
+		<name>unclear word</name>
 		<symbol>XXX</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>תחילת חפיפה בין דוברים</name>
+		<name>start overlap between speakers</name>
 		<symbol>[</symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>סיום חפיפה בין דוברים</opentag>
+		<opentag>end overlap between speakers</opentag>
 	</tag>
 	<tag>
-		<name>סיום חפיפה בין דוברים</name>
+		<name>end overlap between speakers</name>
 		<symbol>]</symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>תחילת דיבור מהיר</name>
+		<name>start fast talk</name>
 		<symbol>&gt;</symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>סיום דיבור מהיר</opentag>
+		<opentag>end fast talk</opentag>
 	</tag>
 	<tag>
-		<name>סיום דיבור מהיר</name>
+		<name>end fast talk</name>
 		<symbol>&lt;</symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>תחילת דיבור איטי</name>
+		<name>start slow talk</name>
 		<symbol>&lt;</symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>סיום דיבור איטי</opentag>
+		<opentag>end slow talk</opentag>
 	</tag>
 	<tag>
-		<name>סיום דיבור איטי</name>
+		<name>end slow talk</name>
 		<symbol>&gt;</symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>תחילת עוצמה גבוהה מהרגיל</name>
+		<name>start loud voice</name>
 		<symbol>^</symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>סיום עוצמה גבוהה מהרגיל</opentag>
+		<opentag>end loud voice</opentag>
 	</tag>
 	<tag>
-		<name>סיום עוצמה גבוהה מהרגיל</name>
+		<name>end loud voice</name>
 		<symbol>^</symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>תחילת עוצמה נמוכה מהרגיל</name>
+		<name>start low voice</name>
 		<symbol>v</symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>סיום עוצמה נמוכה מהרגיל</opentag>
+		<opentag>end low voice</opentag>
 	</tag>
 	<tag>
-		<name>סיום עוצמה נמוכה מהרגיל</name>
+		<name>end low voice</name>
 		<symbol>v</symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>תחילת השלמת מילה חלקית</name>
+		<name>start completion of a partial word</name>
 		<symbol>(</symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>סיום השלמת מילה חלקית</opentag>
+		<opentag>end completion of a partial word</opentag>
 	</tag>
 	<tag>
-		<name>סיום השלמת מילה חלקית</name>
+		<name>end completion of a partial word</name>
 		<symbol>)</symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>מטפל</name>
-		<symbol>מט@</symbol>
+		<name>therapist</name>
+		<symbol>@th</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>קליינט</name>
-		<symbol>קל@</symbol>
+		<name>client</name>
+		<symbol>@cl</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>מידע לא מילולי</name>
-		<symbol>%:	</symbol>
+		<name>Nonverbal information</name>
+		<symbol>	:%</symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>

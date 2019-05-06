@@ -27,7 +27,7 @@
 		</embed>
 		
 		<button id="videoTime" onclick="getAudioFCurrentTime()">get time </button>
-		<p>choose language for transcription</p>
+		<p>Please choose language for transcription, and insert names of client and therapist</p>
 		<form>
   			<select id="languageSelect">
     			<option>English</option>
@@ -35,19 +35,17 @@
   			</select>
 		</form>
 		
-		<button onclick="setLanguage()">set language</button>
-
 		<p hidden id="language"></p>
 
 		<form>
 			<input type = "text" id="therapist" name="therapist" value="insert the therapist's name">
-			<input type = "text" id="patient" name="patient" value="insert the patient's name">
+			<input type = "text" id="client" name="client" value="insert the client's name">
 		</form>
 		
-		<button onclick="setNames()">set names</button>
+		<button onclick="setData()">set</button>
 
 		<p hidden id="therapistName"></p>
-		<p hidden id="patientName"></p>
+		<p hidden id="clientName"></p>
 
 		<div>
 			<form action="FRServlet" method="get">
@@ -88,21 +86,9 @@
 					alert('invalid file');
 				}
 			}
+			var txt;
+			
 			uploudTestFromWordFile();
-			//var xhttp = new XMLHttpRequest();
-			//xhttp.onreadystatechange = function() {
-			//    if (this.readyState == 4 && this.status == 200) {
-			//    	openXmlOfTags(this);
-			//    }
-			//};
-			//if (document.getElementById('language').innerHTML == "עברית") {
-			//	xhttp.open("GET", "tags.xml", true);
-			//} else if (document.getElementById('language').innerHTML == "English") {
-			//	xhttp.open("GET", "EnglishTags.xml", true);
-			//} else {
-			//	xhttp.open("GET", "tags.xml", true);
-			//}
-			//xhttp.send();
 			
 			function checkIfButtonsAreExist() {
 				if (document.getElementById('0') != null) {
@@ -126,10 +112,26 @@
 			    opens = xmlDoc.getElementsByTagName('opentag');
 			    openIndex = 0;
 			    for (i = 0 ; i < names.length; i++) {
+			    	name = names[i].childNodes[0].nodeValue;
 			        var b = document.createElement("BUTTON");
-				    var t = document.createTextNode(names[i].childNodes[0].nodeValue);
+				    var t = document.createTextNode(name);
 				    b.appendChild(t);
-			        b.setAttribute("name", symbols[i].childNodes[0].nodeValue);
+				    // for client and therapist buttons
+					if (name == "מטפל") {
+						var s = "@מט" + document.getElementById('therapistName').innerHTML.substring(0,1) + "\t";
+						b.setAttribute("name", s);
+					} else if (name == "therapist") {
+						var s = "@th" + document.getElementById('therapistName').innerHTML.substring(0,1) + "\t";
+						b.setAttribute("name", s);
+					} else if (name == "קליינט") {
+						var s = "@קל" + document.getElementById('clientName').innerHTML.substring(0,1) + "\t";
+						b.setAttribute("name", s);
+					} else if (name == "client") {
+						var s = "@cl" + document.getElementById('clientName').innerHTML.substring(0,1) + "\t";
+						b.setAttribute("name", s);
+					} else {
+			        	b.setAttribute("name", symbols[i].childNodes[0].nodeValue);
+					}
 			        b.setAttribute("id", i);
 			        type = types[i].childNodes[0].nodeValue;
 			        if (type == "close") {
@@ -201,7 +203,11 @@
 				}
 			}
 
-			function setLanguage() {
+			function setData() {
+				var t = document.getElementById("therapist").value;
+				var p = document.getElementById("client").value;
+				document.getElementById("therapistName").innerHTML = t;
+				document.getElementById("clientName").innerHTML = p;
 				var x = document.getElementById("languageSelect");
 				var i = x.selectedIndex;
 				document.getElementById("language").innerHTML = x.options[i].text;
@@ -222,12 +228,6 @@
 				xhttp.send();
 			}
 			
-			function setNames() {
-				var t = document.getElementById("therapist").value;
-				var p = document.getElementById("patient").value;
-				document.getElementById("therapistName").innerHTML = t;
-				document.getElementById("patientName").innerHTML = p;
-			}
 		</script>
 	</div>
 </body>
