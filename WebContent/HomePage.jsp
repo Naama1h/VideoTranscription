@@ -134,29 +134,25 @@
 					}
 			        b.setAttribute("id", i);
 			        type = types[i].childNodes[0].nodeValue;
+			        b.setAttribute("type", type);
 			        if (type == "close") {
 			        	b.disabled = true;
 			        } else {
 			        	b.disabled = false;
+			        	if (type == "open") {
+			        		b.setAttribute("close", opens[openIndex].childNodes[0].nodeValue);
+			        		openIndex++;
+			        	}
 			        }
 			      	b.onclick = function() {
 			      		writeSymbol(this.getAttribute("name"));
-			      		if (type == "open") {
-				        	updateDisable(opens[openIndex].childNodes[0].nodeValue,
-				        			xmlDoc.getElementsByTagName('symbol'),
-				        			xmlDoc.getElementsByTagName('name'),
-				        			xmlDoc.getElementsByTagName('type'));
-				        } else if (type == "close") {
-				        	updateDisable("restartDisable",
-				        			xmlDoc.getElementsByTagName('symbol'),
-				        			xmlDoc.getElementsByTagName('name'),
-				        			xmlDoc.getElementsByTagName('type'));
+			      		if (this.getAttribute("type") == "open") {
+				        	updateDisable(this.getAttribute("close"), xmlDoc);
+				        } else if (this.getAttribute("type") == "close") {
+				        	updateDisable("restartDisable", xmlDoc);
 				        }
 			      	};
 			      	document.body.appendChild(b);
-			      	if (type == "open") {
-			        	openIndex++;
-			        }
 			    }
 			}
 
@@ -183,21 +179,24 @@
 				//document.getElementById('audioF')
 			}
 			
-			function updateDisable(element, symbols, names, types) {
+			function updateDisable(element, xmlDoc) {
+				//symbols = xmlDoc.getElementsByTagName('symbol');
+		        names = xmlDoc.getElementsByTagName('name');
+		        types = xmlDoc.getElementsByTagName('type');
 				if (element == "restartDisable") {
-				    for (i = 0 ; i < symbols.length; i++) {
+				    for (i = 0 ; i < names.length; i++) {
 					    if (types[i].childNodes[0].nodeValue == "close") {
-					    	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = true;
+					    	document.getElementById(i).disabled = true;
 				        } else {
-				        	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = false;
+				        	document.getElementById(i).disabled = false;
 				        }
 				    }
 				} else {
-				    for (i = 0 ; i < symbols.length; i++) {
+				    for (i = 0 ; i < names.length; i++) {
 					    if (names[i].childNodes[0].nodeValue == element) {
-					    	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = false;
+					    	document.getElementById(i).disabled = false;
 				        } else {
-				        	document.getElementById(symbols[i].childNodes[0].nodeValue).disabled = true;
+				        	document.getElementById(i).disabled = true;
 				        }
 				    }
 				}
