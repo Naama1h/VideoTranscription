@@ -7,49 +7,68 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Video Transcription</title>
 
+<link rel="stylesheet" href="Styles.css">
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 	<div>
-		<p align="center">
-			<font face="verdana" color="green">Choose file to upload in server</font>
-		</p>
+		<div style="background-image: url('backgrounds-blank-blue-953214.jpg');height: 100px;">
+			<p align="left">
+				<font style="font-family: 'Trebuchet MS', Verdana, sans-serif;margin: 16px 16px 16px; color: #ff4411; font-size: 48px; padding-bottom: 10px;">Video Transcription</font>
+			</p>
+		</div>
 
-		<div>
+		<div align="left">
+			<p align="left">
+				<font style="font-family: 'Trebuchet MS', Verdana, sans-serif;margin: 16px 16px 16px; color: #ff4411; font-size: 15px; padding-bottom: 10px;">Load a video to transcript</font>
+			</p>
 			<input type="file" name="file" id="file" />
 			<button type="submit" value="Upload" name="submit" id="submit"
 				onclick="upload()">Load</button>
 		</div>
 
-		<embed id="audioF" src="" loop="1" height="200" width="500"
-			autostart="false">
-		</embed>
+		<div align="left">
+			<div style="width: 60%; float:left">
+				<embed id="audioF" src="" loop="1" height="200" width="500"
+					autostart="false" style="width: 467px; height: 223px">
+				</embed>
+			</div>
+			<div style="width: 40%; float:right; background-color: #ffffcc; background-clip: padding-box; border-radius: 8px">
+			<p>
+				<font style="font-family:'Trebuchet MS', Verdana, sans-serif; font-size:14px; margin: 5px 5px 5px; text-align: center;">Please choose language for transcription, and insert names of client and therapist</font>
+			</p>
+			<div align="center">
+				<form style="width: 86px; ">
+  					<select style="font-family:'Trebuchet MS', Verdana, sans-serif" id="languageSelect">
+   						<option>English</option>
+   						<option>עברית</option>
+  					</select>
+				</form>
+			</div>
+			<div align="center">
+				<form style="width: 173px; ">
+					<input type="text" id="therapist" name="therapist" value="insert the therapist's name" style="float:inherit; width: 250px; ">
+					<input type="text" id="client" name="client" value="insert the client's name" style="float:inherit;width: 250px;">
+				</form>
+			</div>
+			<div align="center">
+				<button onclick="setData()">set</button></p>
+			</div>
+			
+			<p hidden="" id="language">
+			<p hidden="" id="therapistName"></p>
+			<p hidden="" id="clientName"></p>
+		</div>
+		</div>
 		
 		<button id="videoTime" onclick="getAudioFCurrentTime()">get time </button>
-		<p>Please choose language for transcription, and insert names of client and therapist</p>
-		<form>
-  			<select id="languageSelect">
-    			<option>English</option>
-    			<option>עברית</option>
-  			</select>
-		</form>
 		
-		<p hidden id="language"></p>
-
-		<form>
-			<input type = "text" id="therapist" name="therapist" value="insert the therapist's name">
-			<input type = "text" id="client" name="client" value="insert the client's name">
-		</form>
 		
-		<button onclick="setData()">set</button>
-
-		<p hidden id="therapistName"></p>
-		<p hidden id="clientName"></p>
 
 		<div>
 			<form action="FRServlet" method="get">
-				<input type = "text" id="nisaion" name="nisaion" value="נסיון">
 				<textarea rows="10" cols="2" id="transcriptionText"
 				name="transcriptionText" style="width: 100%;"></textarea>
 				<input type="submit" value="save"/>
@@ -226,6 +245,7 @@
 				}
 				xhttp.send();
 			}
+			
 			
 		</script>
 	</div>
