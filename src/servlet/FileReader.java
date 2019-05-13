@@ -38,18 +38,23 @@ public class FileReader {
 			XWPFDocument document = new XWPFDocument(dataStream);    
 			List<XWPFParagraph> paragraphs = document.getParagraphs();
 	        String text = "";
-	        for (XWPFParagraph para : paragraphs) {
-	            text = text + para.getText() + "\n";
+	        for (int i=0; i < paragraphs.size() ; i++) {
+	        	text = text + paragraphs.get(i).getText() + "\n";
+	        }
+	        if (text.contains("@ סיום\n")) {
+	        	text = text.replaceAll("@ סיום\n", "");
 	        }
 	        filesystem.close();
 	        document.close();
-	        System.out.println(text);
+	        if (text.equals("\n")) {
+	        	return "@ התחל:\n";
+	        }
 	        return text;
 		} catch (GeneralSecurityException ex) {
 			return "badPassword";
 		} catch (org.apache.poi.EmptyFileException e1) {
 			e1.printStackTrace();
-			return "";
+			return "@ התחל:\n";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "badPath";
@@ -67,6 +72,9 @@ public class FileReader {
 			tmpRun.addCarriageReturn();
 			tmpRun.setFontSize(12);
 		}
+		tmpRun.setText("@ סיום");
+		tmpRun.addCarriageReturn();
+		tmpRun.setFontSize(12);
 		try {
 			document.write(new FileOutputStream(new File(path)));
 			document.close();
@@ -77,6 +85,7 @@ public class FileReader {
 		}
 		
 		// try to encryption with password
+		/*
 		POIFSFileSystem fs = new POIFSFileSystem();
 		EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
 		Encryptor enc = info.getEncryptor();
@@ -93,6 +102,6 @@ public class FileReader {
 			e1.printStackTrace();
 		} catch (GeneralSecurityException e2) {
 			e2.printStackTrace();
-		}
+		}*/
 	}
 }
