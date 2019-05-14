@@ -14,10 +14,24 @@
 </head>
 <body>
 	<div>
-		<div style="background-image: url('backgrounds-blank-blue-953214.jpg');height: 100px;">
-			<p align="left">
-				<font style="font-family: 'Trebuchet MS', Verdana, sans-serif;margin: 16px 16px 16px; color: #ff4411; font-size: 48px; padding-bottom: 10px;">Video Transcription</font>
-			</p>
+		<div style="background-image: url('backgrounds-blank-blue-953214.jpg');height: 150px;">
+			<p align="left" class="headline">
+				<img src="pen_icon_no_bg.jpg" style=" margin-top: 15px; width: 51px; height: 47px; border-radius: 70px; border-style:hidden;">
+				<font style="font-family:'Century Schoolbook', Georgia, Times, serif;margin: 16px 16px 16px;
+						color: #ff4411;	font-size: 48px; padding-bottom: 10px; border-bottom-color: gray;">Video Transcription</font>
+			</p> 
+			<button id="about" onclick="showAbout()">About</button>
+		</div>
+		
+		<div id="AboutInformation" class="modal" style="display: none;
+  			position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%;
+  			height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);
+  			 background-color: #fefefe;">
+			<div class="modal-content" style="margin: auto; padding: 20px; border: 1px solid #888; width: 80%;">
+    			<span id="closeAbout" onclick="CloseAbout()" class="close" style="color: #aaaaaa;
+ 					float: right; font-size: 28px; font-weight: bold;">&times;</span>
+    			<p>Some information in the Modal..</p>
+  			</div>
 		</div>
 
 		<div align="left">
@@ -25,7 +39,7 @@
 				<font style="font-family: 'Trebuchet MS', Verdana, sans-serif;margin: 16px 16px 16px; color: #ff4411; font-size: 15px; padding-bottom: 10px;">Load a video to transcript</font>
 			</p>
 			<input type="file" name="file" id="file" />
-			<button type="submit" value="Upload" name="submit" id="submit"
+			<button type="submit" value="Upload" name="submit" id="submit" style=""
 				onclick="upload()">Load</button>
 		</div>
 
@@ -246,7 +260,23 @@
 				xhttp.send();
 			}
 			
-			
+			var aboutInfo = document.getElementById("AboutInformation");
+			var btn = document.getElementById("about");
+			var span = document.getElementsByClassName("close")[0];
+
+			function showAbout() {
+ 				aboutInfo.style.display = "block";
+			}
+
+			function CloseAbout() {
+ 				aboutInfo.style.display = "none";
+			}
+
+			//window.onclick = function(event) {
+  				//if (event.target == aboutInfo) {
+    				//aboutInfo.style.display = "none";
+  				//}
+			//}
 		</script>
 	</div>
 </body>
