@@ -23,6 +23,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STOnOff;
 
 public class FileReader {
 	
@@ -41,20 +44,20 @@ public class FileReader {
 	        for (int i=0; i < paragraphs.size() ; i++) {
 	        	text = text + paragraphs.get(i).getText() + "\n";
 	        }
-	        if (text.contains("@ ñéåí\n")) {
-	        	text = text.replaceAll("@ ñéåí\n", "");
+	        if (text.contains("@ ï¿½ï¿½ï¿½ï¿½\n")) {
+	        	text = text.replaceAll("@ ï¿½ï¿½ï¿½ï¿½\n", "");
 	        }
 	        filesystem.close();
 	        document.close();
 	        if (text.equals("\n")) {
-	        	return "@ äúçì:\n";
+	        	return "@ ï¿½ï¿½ï¿½ï¿½:\n";
 	        }
 	        return text;
 		} catch (GeneralSecurityException ex) {
 			return "badPassword";
 		} catch (org.apache.poi.EmptyFileException e1) {
 			e1.printStackTrace();
-			return "@ äúçì:\n";
+			return "@ ï¿½ï¿½ï¿½ï¿½:\n";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "badPath";
@@ -65,6 +68,11 @@ public class FileReader {
 		// change the text in the file
 		XWPFDocument document = new XWPFDocument();
 		XWPFParagraph tmpParagraph = document.createParagraph();
+		tmpParagraph.setIndentationRight(0);
+		CTP ctp = tmpParagraph.getCTP();
+		CTPPr ctppr;
+		if ((ctppr = ctp.getPPr()) == null) ctppr = ctp.addNewPPr();
+		ctppr.addNewBidi().setVal(STOnOff.ON);
 		XWPFRun tmpRun = tmpParagraph.createRun();
 		String[] para = text.split("\n");
 		for (int i=0; i < para.length ; i++) {
@@ -72,7 +80,7 @@ public class FileReader {
 			tmpRun.addCarriageReturn();
 			tmpRun.setFontSize(12);
 		}
-		tmpRun.setText("@ ñéåí");
+		tmpRun.setText("@ ï¿½ï¿½ï¿½ï¿½");
 		tmpRun.addCarriageReturn();
 		tmpRun.setFontSize(12);
 		try {

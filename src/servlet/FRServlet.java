@@ -51,7 +51,7 @@ public class FRServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String text;
 		FileReader fr = new FileReader();
-		request.setCharacterEncoding("UTF-8");
+		//request.setCharacterEncoding("UTF-8");
 		path = request.getParameter("wordfile");
 		this.password = request.getParameter("password");
 		if (path != null) {
