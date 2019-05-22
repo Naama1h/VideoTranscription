@@ -79,9 +79,9 @@
 				<div align="center">
 					<form style="width: 173px;">
 						<input type="text" id="therapist" name="therapist"
-							value="insert the therapist's name"
+							placeholder="insert the therapist's name"
 							style="float: inherit; width: 250px;"> <input type="text"
-							id="client" name="client" value="insert the client's name"
+							id="client" name="client" placeholder="insert the client's name"
 							style="float: inherit; width: 250px;">
 					</form>
 				</div>
@@ -90,14 +90,11 @@
 					</p>
 				</div>
 
-				<p hidden="" id="language">
+				<p hidden="" id="language" value="עברית">
 				<p hidden="" id="therapistName"></p>
 				<p hidden="" id="clientName"></p>
 			</div>
 		</div>
-
-		<button id="videoTime" onclick="getAudioFCurrentTime()">get
-			time</button>
 
 
 		<div>
@@ -112,7 +109,7 @@
 
 			<form id="uploadwordfile" action="FRServlet" method="post">
 				<input type="file" name="wordfile" id="wordfile" /> <input
-					type="text" name="password" id="password" value="הכנס סיסמא">
+					type="text" name="password" id="password" placeholder="הכנס סיסמא">
 				<input type="submit" value="open" />
 			</form>
 
@@ -131,14 +128,15 @@
 				
 				var audio1=document.getElementById("audioF1");
 				var clone1=audio1.cloneNode(true);
-				var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
-				clone1.setAttribute('src',s);
+				//var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+				var s = String(ChosenPath);
+				clone1.setAttribute('src',ChosenPath);
 				audio1.parentNode.replaceChild(clone1,audio1);
 				
-				var audio2=document.getElementById("audioF2");
-				var clone2=audio2.cloneNode(true);
-				clone2.setAttribute('src',ChosenPath);
-				audio2.parentNode.replaceChild(clone2,audio2);
+				//var audio2=document.getElementById("audioF2");
+				//var clone2=audio2.cloneNode(true);
+				//clone2.setAttribute('src',ChosenPath);
+				//audio2.parentNode.replaceChild(clone2,audio2);
 			}
 			
 			function uploudTestFromWordFile() {
@@ -235,12 +233,51 @@
 				el.focus();
 				return false
 			}
-			
+			TherapistOrClient = 0;
 			function getAudioFCurrentTime() {
-				document.write(document.getElementById('audioF1').currentTime);
-				//document.write(document.getElementById('audioF1').getAttribute("currentTime"));
-				//document.getElementById('audioF')
+				writeSymbol("\n");
+				if (TherapistOrClient%2 == 0) {
+					if (document.getElementById('language') == "English") {
+						var s = "@th" + document.getElementById('therapistName').innerHTML.substring(0,1);
+					} else {
+						var s = "@מט" + document.getElementById('therapistName').innerHTML.substring(0,1);
+					}
+				} else {
+					if (document.getElementById('language') == "English") {
+						var s = "@cl" + document.getElementById('clientName').innerHTML.substring(0,1);
+					} else {
+						var s = "@קל" + document.getElementById('clientName').innerHTML.substring(0,1);
+					}
+				}
+				var time = '-' + FormatTime(document.getElementById('audioF1').currentTime) + '-' + '\n' + s + "    ";
+				writeSymbol(time);
+				TherapistOrClient += 1;
 			}
+			
+			function FormatTime(seconds) {
+				var hours = Math.floor(seconds/360);
+				var mins = Math.floor((seconds-hours*360)/60);
+				var sec = Math.floor(seconds%60);
+				if (hours < 10) {
+    				hours = "0" + hours; 
+  				}
+				if (mins < 10) {
+    				mins = "0" + mins; 
+  				}
+  				if (sec < 10) {
+    				sec  = "0" + sec;
+  				}
+				return String(hours) + ":" + String(mins) + ":" + String(sec)
+			}
+			
+			document.onkeypress = function (e) { 
+				e = e || window.event; 
+				var charCode = e.charCode || e.keyCode; 
+				if (e.keyCode === 13) {
+					e.preventDefault();
+					getAudioFCurrentTime();
+				}
+			};
 			
 			function updateDisable(element, xmlDoc) {
 				//symbols = xmlDoc.getElementsByTagName('symbol');

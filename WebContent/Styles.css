@@ -57,7 +57,7 @@ button:active {
 }
 
 button:DISABLED {
-	background-color: #6b6b47;
+	background-color: #c0c0c0;
 }
 
 input[type="text"] {
@@ -68,17 +68,16 @@ input[type="text"] {
 	text-align: center;
 	text-decoration: none;
 	outline: none;
-	color: #ffffcc;
-	background-color: #ffb366;
+	color: #808080;
+	background-color: #fef08d;
 	border: none;
-	border-radius: 8px;
-	box-shadow: 0 4px #999;
+	border-radius: 4px;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	margin-bottom: 6px;
 	margin-left: 3px;
 }
 
-.sumbit input {
+input[type="submit"] {
 	display: inline-block;
 	padding: 5px 10px;
 	font-size: 14px;
@@ -87,23 +86,40 @@ input[type="text"] {
 	text-decoration: none;
 	outline: none;
 	color: #ffffcc;
-	background-color: #ffb366;
+	background-color: #fc8e69;
 	border: none;
 	border-radius: 8px;
-	box-shadow: 0 4px #999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	margin-bottom: 6px;
 	margin-left: 3px;
 }
 
 input[type="submit"]:hover {
-	background-color: #e67300
+	background-color: #fc794e
 }
 
-input[type="submit" "]:active {
-	background-color: #e67300;
-	box-shadow: 0 4px #666;
+input[type="submit"]:active {
+	background-color: #fc794e;
 	transform: translateY(4px);
+}
+
+input[type="text"]:hover {
+	background-color: #f5d803
+}
+
+input[type="text"]:active {
+	background-color: #f5d803;
+	transform: translateY(4px);
+}
+
+select {
+	color: #ffffcc;
+	background-color: #119ce8;
+}
+
+button[type="submit"] {
+	color: #ffffcc;
+	background-color: #65c1f3;
 }
 
 .close:hover, .close:focus {
