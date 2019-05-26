@@ -29,6 +29,8 @@ public class FRServlet extends HttpServlet {
 	private static final String thisPath="C:\\Users\\naama\\workspace\\VideoTranscription";
 	private String path = "";
 	private String password = "";
+	private String mp3sourse = "";
+	private String fullName = "";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -37,11 +39,14 @@ public class FRServlet extends HttpServlet {
 
 		String text = request.getParameter("transcriptionText");
 		FileReader fr = new FileReader();
-		fr.saveText(this.path, text, this.password);
+		IntactnessFile i = new IntactnessFile();
+		//fr.saveText(this.path, text, this.password);
 		//response.setContentType("text/plain");
 		//response.setCharacterEncoding("UTF-8");
-		
+		String intactnessMessage = i.checkIntactness(text, this.mp3sourse);
+		request.setAttribute("intactnessMessage", intactnessMessage);
 		request.setAttribute("data", text);
+		request.setAttribute("fullname", this.fullName);
 		request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
 	}
 
@@ -52,10 +57,12 @@ public class FRServlet extends HttpServlet {
 		String text;
 		FileReader fr = new FileReader();
 		//request.setCharacterEncoding("UTF-8");
-		path = request.getParameter("wordfile");
+		this.path = request.getParameter("wordfile");
 		this.password = request.getParameter("password");
-		if (path != null) {
-			text = fr.getText(path,this.password);
+		this.mp3sourse = request.getParameter("mp3file");
+		this.fullName = request.getParameter("mp3fullfilename");
+		if (this.path != null) {
+			text = fr.getText(this.path,this.password,this.mp3sourse);
 		} else {
 			text = "badPath";
 		}
@@ -63,6 +70,7 @@ public class FRServlet extends HttpServlet {
 //		response.setContentType("text/plain");
 //		response.setCharacterEncoding("UTF-8");
 		request.setAttribute("data", text);
+		request.setAttribute("fullname", this.fullName);
         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
 	}
 }

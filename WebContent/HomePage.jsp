@@ -71,8 +71,8 @@
 					<form style="width: 86px;">
 						<select style="font-family: 'Trebuchet MS', Verdana, sans-serif"
 							id="languageSelect">
-							<option>English</option>
 							<option>עברית</option>
+							<option>English</option>
 						</select>
 					</form>
 				</div>
@@ -87,7 +87,6 @@
 				</div>
 				<div align="center">
 					<button onclick="setData()">set</button>
-					</p>
 				</div>
 
 				<p hidden="" id="language" value="עברית">
@@ -99,8 +98,8 @@
 
 		<div>
 			<form action="FRServlet" method="get">
-				<textarea rows="10" cols="2" id="transcriptionText"
-					name="transcriptionText" style="width: 100%;"></textarea>
+				<textarea disabled rows="10" cols="2" id="transcriptionText"
+					name="transcriptionText" style="width: 100%;">בחר הקלטה בכדי להתחיל</textarea>
 				<input type="submit" value="save" />
 			</form>
 
@@ -108,11 +107,15 @@
                 <div class="col-lg-12">-->
 
 			<form id="uploadwordfile" action="FRServlet" method="post">
-				<input type="file" name="wordfile" id="wordfile" /> <input
-					type="text" name="password" id="password" placeholder="הכנס סיסמא">
-				<input type="submit" value="open" />
+				<input type="file" name="wordfile" id="wordfile" />
+				<input type="text" name="password" id="password" placeholder="הכנס סיסמא">
+				<input type="hidden" name="mp3file" id="mp3file" />
+				<input type="hidden" name="mp3fullfilename" id="mp3fullfilename" value="">
+				<input id="submitUploadWordFile" type="submit" value="open" disabled/>
 			</form>
 
+			<input type="hidden" id="intactness" value=<%= request.getAttribute("intactnessMessage") %>>
+			<input type="hidden" id="chosenfilename" value=<%= request.getAttribute("fullname") %>>
 			<textarea hidden rows="10" cols="2" id="hiddenP" style="width: 100%;"><%= request.getAttribute("data") %></textarea>
 		</div>
 		<script type="text/javascript">
@@ -128,16 +131,37 @@
 				
 				var audio1=document.getElementById("audioF1");
 				var clone1=audio1.cloneNode(true);
-				//var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
-				var s = String(ChosenPath);
-				clone1.setAttribute('src',ChosenPath);
+				var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+				//var s = String(ChosenPath);
+				clone1.setAttribute('src',s);
 				audio1.parentNode.replaceChild(clone1,audio1);
 				
 				//var audio2=document.getElementById("audioF2");
 				//var clone2=audio2.cloneNode(true);
 				//clone2.setAttribute('src',ChosenPath);
 				//audio2.parentNode.replaceChild(clone2,audio2);
+				var s2 = String(ChosenPath).split("\\")
+				s2 = s2[s2.length - 1]
+				document.getElementById("submitUploadWordFile").disabled = false;
+				document.getElementById("transcriptionText").disabled = false;
+				document.getElementById("mp3file").value = s2;
+				document.getElementById("mp3fullfilename").value = ChosenPath;
 			}
+			
+			function setAudio(path) {
+				if (path != "null") {
+					var audioelem = document.getElementById("audioF1");
+					var cloneelem = audioelem.cloneNode(true);
+					var selem = String(path).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+					//var s = String(path);
+					cloneelem.setAttribute('src',selem);
+					audioelem.parentNode.replaceChild(cloneelem,audioelem);
+
+					document.getElementById("transcriptionText").disabled = false;
+				}
+			}
+			
+			setAudio(document.getElementById("chosenfilename").value);
 			
 			function uploudTestFromWordFile() {
 			    var text = document.getElementById('hiddenP').value;
@@ -238,18 +262,18 @@
 				writeSymbol("\n");
 				if (TherapistOrClient%2 == 0) {
 					if (document.getElementById('language') == "English") {
-						var s = "@th" + document.getElementById('therapistName').innerHTML.substring(0,1);
+						var s = "*th" + document.getElementById('therapistName').innerHTML.substring(0,1);
 					} else {
-						var s = "@מט" + document.getElementById('therapistName').innerHTML.substring(0,1);
+						var s = "*מט" + document.getElementById('therapistName').innerHTML.substring(0,1);
 					}
 				} else {
 					if (document.getElementById('language') == "English") {
-						var s = "@cl" + document.getElementById('clientName').innerHTML.substring(0,1);
+						var s = "*cl" + document.getElementById('clientName').innerHTML.substring(0,1);
 					} else {
-						var s = "@קל" + document.getElementById('clientName').innerHTML.substring(0,1);
+						var s = "*קל" + document.getElementById('clientName').innerHTML.substring(0,1);
 					}
 				}
-				var time = '-' + FormatTime(document.getElementById('audioF1').currentTime) + '-' + '\n' + s + "    ";
+				var time = '-' + FormatTime(document.getElementById('audioF1').currentTime) + '-' + '\n' + s + ":    ";
 				writeSymbol(time);
 				TherapistOrClient += 1;
 			}
@@ -343,6 +367,25 @@
     				//aboutInfo.style.display = "none";
   				//}
 			//}
+			
+			function alertIntactness(message) {
+				if (message != "null" && message != "") {
+					if (message == "missBeginning") {
+						alert("הפורמט אינו חוקי");
+					} else if (message == "problemWithMp3") {
+						alert("בעיה בשורת מקור הקובץ");
+					} else if (message == "problemWithBeginning") {
+						alert("בעיה בשורת ההתחל");
+					} else if (message == "problemWithLanguage") {
+						alert("בעיה בשורת השפה");
+					} else if (message == "problemWithParticipants") {
+						alert("בעיה בשורת המשתתפים");
+					} else {
+						alert("בעיה בפורמט :" + String(message));
+					}
+				}
+			}
+			alertIntactness(document.getElementById("intactness").value);
 		</script>
 	</div>
 </body>

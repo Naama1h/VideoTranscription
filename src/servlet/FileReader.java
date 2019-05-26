@@ -29,7 +29,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STOnOff;
 
 public class FileReader {
 	
-	public String getText(String path, String password) {
+	public String getText(String path, String password, String mp3sourse) {
 		try {
 			POIFSFileSystem filesystem = new POIFSFileSystem(new FileInputStream(path));
 			EncryptionInfo info = new EncryptionInfo(filesystem);
@@ -44,20 +44,42 @@ public class FileReader {
 	        for (int i=0; i < paragraphs.size() ; i++) {
 	        	text = text + paragraphs.get(i).getText() + "\n";
 	        }
-	        if (text.contains("@ ����\n")) {
-	        	text = text.replaceAll("@ ����\n", "");
+	        if (text.contains("@ סיום\n")) {
+	        	text = text.replaceAll("@ סיום\n", "");
 	        }
 	        filesystem.close();
 	        document.close();
 	        if (text.equals("\n")) {
-	        	return "@ ����:\n";
+	        	return "@ מקור: " + mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
 	        }
 	        return text;
+		} catch (org.apache.poi.poifs.filesystem.OfficeXmlFileException ex1) {
+			try {
+				FileInputStream fis2 = new FileInputStream(path);
+				XWPFDocument xdoc2 = new XWPFDocument(OPCPackage.open(fis2));
+				List<XWPFParagraph> paragraphList = xdoc2.getParagraphs();
+		        String text = "";
+		        for (int i=0; i < paragraphList.size() ; i++) {
+		        	text = text + paragraphList.get(i).getText() + "\n";
+		        }
+		        xdoc2.close();
+		        fis2.close();
+		        if (text.contains("@ סיום\n")) {
+		        	text = text.replaceAll("@ סיום\n", "");
+		        }
+		        if (text.equals("\n")) {
+		        	return "@ מקור: " + mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
+		        }
+		        return text;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return "badPath";
+			}
 		} catch (GeneralSecurityException ex) {
 			return "badPassword";
 		} catch (org.apache.poi.EmptyFileException e1) {
 			e1.printStackTrace();
-			return "@ ����:\n";
+			return "@ מקור: " + mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "badPath";
@@ -80,7 +102,7 @@ public class FileReader {
 			tmpRun.addCarriageReturn();
 			tmpRun.setFontSize(12);
 		}
-		tmpRun.setText("@ ����");
+		tmpRun.setText("@ סיום");
 		tmpRun.addCarriageReturn();
 		tmpRun.setFontSize(12);
 		try {
