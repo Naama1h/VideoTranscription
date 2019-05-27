@@ -23,16 +23,27 @@
 					style="font-family: 'Century Schoolbook', Georgia, Times, serif; margin: 16px 16px 16px; color: #ff4411; font-size: 48px; padding-bottom: 10px; border-bottom-color: gray;">Video
 					Transcription</font>
 			</p>
-			<button id="about" onclick="showAbout()">About</button>
+			<button id="about" onclick="showAbout()">About</button> 
+			<button id="Instructions" onclick="showInstructions()">Instructions</button>
 		</div>
 
 		<div id="AboutInformation" class="modal"
 			style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); background-color: #fefefe;">
-			<div class="modal-content"
+			<div class="modal-content">
+				<span id="closeAbout" onclick="CloseAbout()" class="close">&times;</span>
+				<h2>About</h2>
+				<p id="AboutText"></p>
+			</div>
+		</div> 
+		
+		<div id="UsageInstructions" class="modal2"
+			style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); background-color: #fefefe;">
+			<div class="modal-content2"
 				style="margin: auto; padding: 20px; border: 1px solid #888; width: 80%;">
-				<span id="closeAbout" onclick="CloseAbout()" class="close"
+				<span id="closeInstruction" onclick="CloseInstructions()" class="closeInstr"
 					style="color: #aaaaaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
-				<p>Some information in the Modal..</p>
+					<h2>Usage Instructions</h2>
+				<p id="UsageInstructionsText"></p>
 			</div>
 		</div>
 
@@ -49,15 +60,9 @@
 
 		<div align="left">
 			<div style="width: 60%; float: left">
-				<embed id="audioF" src="" loop="1" height="200" width="500"
-					autostart="false" style="width: 467px; height: 223px">
-				</embed>
 				<audio id="audioF1" controls>
 					<source src="" type="audio/mp3">
 				</audio>
-				<video id="audioF2" style="width: 60%; float: left" controls>
-					<source src="" type="video/mp4">
-				</video>
 			</div>
 			<div
 				style="width: 40%; float: right; background-color: #ffffcc; background-clip: padding-box; border-radius: 8px">
@@ -99,7 +104,7 @@
 		<div>
 			<form action="FRServlet" method="get">
 				<textarea disabled rows="10" cols="2" id="transcriptionText"
-					name="transcriptionText" style="width: 100%;">בחר הקלטה בכדי להתחיל</textarea>
+					name="transcriptionText" style="width: 100%; background-attachment: fixed">בחר הקלטה בכדי להתחיל</textarea>
 				<input type="submit" value="save" />
 			</form>
 
@@ -116,30 +121,21 @@
 
 			<input type="hidden" id="intactness" value=<%= request.getAttribute("intactnessMessage") %>>
 			<input type="hidden" id="chosenfilename" value=<%= request.getAttribute("fullname") %>>
-			<textarea hidden rows="10" cols="2" id="hiddenP" style="width: 100%;"><%= request.getAttribute("data") %></textarea>
+			<textarea hidden rows="10" cols="2" id="hiddenP"><%= request.getAttribute("data") %></textarea>
 		</div>
 		<script type="text/javascript">
 			//request.setCharacterEncoding("UTF-8");
 			function upload() {
 				// upload the file
 				var ChosenPath = document.getElementById('file').value;
-
-				var audio=document.getElementById("audioF");
-				var clone=audio.cloneNode(true);
-				clone.setAttribute('src',ChosenPath);
-				audio.parentNode.replaceChild(clone,audio);
 				
 				var audio1=document.getElementById("audioF1");
 				var clone1=audio1.cloneNode(true);
-				var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
-				//var s = String(ChosenPath);
+				//var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+				var s = String(ChosenPath);
 				clone1.setAttribute('src',s);
 				audio1.parentNode.replaceChild(clone1,audio1);
-				
-				//var audio2=document.getElementById("audioF2");
-				//var clone2=audio2.cloneNode(true);
-				//clone2.setAttribute('src',ChosenPath);
-				//audio2.parentNode.replaceChild(clone2,audio2);
+
 				var s2 = String(ChosenPath).split("\\")
 				s2 = s2[s2.length - 1]
 				document.getElementById("submitUploadWordFile").disabled = false;
@@ -152,8 +148,8 @@
 				if (path != "null") {
 					var audioelem = document.getElementById("audioF1");
 					var cloneelem = audioelem.cloneNode(true);
-					var selem = String(path).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
-					//var s = String(path);
+					//var selem = String(path).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+					var selem = String(path);
 					cloneelem.setAttribute('src',selem);
 					audioelem.parentNode.replaceChild(cloneelem,audioelem);
 
@@ -240,6 +236,25 @@
 			      	document.body.appendChild(b);
 			    }
 			}
+			
+			function LoadModals() {
+				var xhttp = new XMLHttpRequest();
+				xhttp.open("GET", "Modals.xml", false);
+				xhttp.send();
+				var xmlDoc = xhttp.responseXML;
+				if (!xmlDoc) {
+					xmlDoc = (new DOMParser()).parseFromString(xhttp.responseText,'text/xml');
+				}
+				var modals = xmlDoc.getElementsByTagName('modal');
+				var i, name, text;
+				for (i = 0 ; i < modals.length; i++) {
+			    	name = modals[i].getElementsByTagName("name")[0].firstChild.data;
+			    	text = modals[i].getElementsByTagName("text")[0].firstChild.data;
+			    	document.getElementById(name).innerHTML = text.replace(/#/g,"<br>");
+			    	//if (i>0){document.write(name);}
+				}
+				//document.write(name+text);
+			}
 
 			function writeSymbol(symbol) {
 				typeInTextarea(document.getElementById('transcriptionText'), symbol);
@@ -257,6 +272,7 @@
 				el.focus();
 				return false
 			}
+			
 			TherapistOrClient = 0;
 			function getAudioFCurrentTime() {
 				writeSymbol("\n");
@@ -352,21 +368,29 @@
 			}
 			
 			var aboutInfo = document.getElementById("AboutInformation");
+			var InstructionInfo = document.getElementById("UsageInstructions");
 			var btn = document.getElementById("about");
-			var span = document.getElementsByClassName("close")[0];
+			var btn2 = document.getElementById("Instructions");
+			//var span = document.getElementsByClassName("close")[0]; 
+			//var span2 = document.getElementsByClassName("closeInstr")[0];
 
 			function showAbout() {
+				LoadModals();
  				aboutInfo.style.display = "block";
+			}
+			
+			function showInstructions() {
+				LoadModals();
+ 				InstructionInfo.style.display = "block";
 			}
 
 			function CloseAbout() {
  				aboutInfo.style.display = "none";
 			}
-			//window.onclick = function(event) {
-  				//if (event.target == aboutInfo) {
-    				//aboutInfo.style.display = "none";
-  				//}
-			//}
+			
+			function CloseInstructions() {
+ 				InstructionInfo.style.display = "none";
+			}
 			
 			function alertIntactness(message) {
 				if (message != "null" && message != "") {
