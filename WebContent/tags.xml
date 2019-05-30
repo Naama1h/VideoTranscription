@@ -7,32 +7,44 @@
 		<type>single</type>
 	</tag>
 	<tag>
+		<name>אירוע שכיח</name>
+		<symbol>&#60;הכנס פה></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
 		<name>צחוק</name>
-		<symbol>[!= צוחק ]</symbol>
+		<symbol>&#60;צחוק></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
 		<name>בכי</name>
-		<symbol>[!= בוכה ]</symbol>
+		<symbol>&#60;בכי></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>צעקה</name>
-		<symbol>[!= צועק ]</symbol>
+		<name>צקצוק</name>
+		<symbol>&#60;צקצוק></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>לחישה</name>
-		<symbol>[!= לוחש ]</symbol>
+		<name>אנחה</name>
+		<symbol>&#60;אנחה></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>שירה</name>
-		<symbol>[!= שר ]</symbol>
+		<name>קולות גוף</name>
+		<symbol>&#60;קולות גוף></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>רעשי רקע</name>
+		<symbol>&#60;רעשי רקע></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
@@ -57,53 +69,118 @@
 	</tag>
 	<tag>
 		<name>תחילת דיבור מהיר</name>
-		<symbol>&gt;</symbol>
+		<symbol>&#60;מהר></symbol>
 		<disable>false</disable>
 		<type>open</type>
 		<opentag>סיום דיבור מהיר</opentag>
 	</tag>
 	<tag>
 		<name>סיום דיבור מהיר</name>
-		<symbol>&lt;</symbol>
+		<symbol>&#60;סמהר></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת דיבור איטי</name>
-		<symbol>&lt;</symbol>
+		<symbol>&#60;לאט></symbol>
 		<disable>false</disable>
 		<type>open</type>
 		<opentag>סיום דיבור איטי</opentag>
 	</tag>
 	<tag>
 		<name>סיום דיבור איטי</name>
-		<symbol>&gt;</symbol>
+		<symbol>&#60;סלאט></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת עוצמה גבוהה מהרגיל</name>
-		<symbol>^</symbol>
+		<symbol>&#60;רם></symbol>
 		<disable>false</disable>
 		<type>open</type>
 		<opentag>סיום עוצמה גבוהה מהרגיל</opentag>
 	</tag>
 	<tag>
 		<name>סיום עוצמה גבוהה מהרגיל</name>
-		<symbol>^</symbol>
+		<symbol>&#60;סרם></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>תחילת מילים הנאמרות בצעקה</name>
+		<symbol>&#60;צעקה></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>סיום מילים הנאמרות בצעקה</opentag>
+	</tag>
+	<tag>
+		<name>סיום מילים הנאמרות בצעקה</name>
+		<symbol>&#60;סצעקה></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
 		<name>תחילת עוצמה נמוכה מהרגיל</name>
-		<symbol>v</symbol>
+		<symbol>&#60;חלש></symbol>
 		<disable>false</disable>
 		<type>open</type>
 		<opentag>סיום עוצמה נמוכה מהרגיל</opentag>
 	</tag>
 	<tag>
 		<name>סיום עוצמה נמוכה מהרגיל</name>
-		<symbol>v</symbol>
+		<symbol>&#60;סחלש></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>תחילת שימוש בקול שונה מהרגיל</name>
+		<symbol>&#60;חיקוי></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>סיום שימוש בקול שונה מהרגיל</opentag>
+	</tag>
+	<tag>
+		<name>סיום שימוש בקול שונה מהרגיל</name>
+		<symbol>&#60;סחיקוי></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>תחילת קול רועד\חנוק</name>
+		<symbol>&#60;רועד></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>סיום קול רועד\חנוק</opentag>
+	</tag>
+	<tag>
+		<name>סיום קול רועד\חנוק</name>
+		<symbol>&#60;סרועד></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>תחילת ציניות</name>
+		<symbol>&#60;ציניות></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>סיום ציניות</opentag>
+	</tag>
+	<tag>
+		<name>סיום ציניות</name>
+		<symbol>&#60;סציניות></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>תחילת הומור</name>
+		<symbol>&#60;הומור></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>סיום הומור</opentag>
+	</tag>
+	<tag>
+		<name>סיום הומור</name>
+		<symbol>&#60;סהומור></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
@@ -121,20 +198,62 @@
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>מטפל</name>
-		<symbol>מט@</symbol>
+		<name>שם המטפל</name>
+		<symbol>&#60;מט></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>קליינט</name>
-		<symbol>קל@</symbol>
+		<name>שם המטופל</name>
+		<symbol>&#60;קל></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>מידע לא מילולי</name>
+		<name>שם מקום (קוד המקום=צירוף אותיות מוצפן המסמל מקום)</name>
+		<symbol>&#60;מקום קוד_מקום></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>שם דמות (קוד הדמות=צירוף אותיות מוצפן המסמל דמות)</name>
+		<symbol>&#60;דמות קוד_דמות></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>הערה או מידע לא מילולי</name>
 		<symbol>%:	</symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+		<tag>
+		<name>השהייה לשניות בודדות</name>
+		<symbol>&#60;ש></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>שתיקה ממושכת</name>
+		<symbol>&#60;שתיקה></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>שתיקה ליותר מדקה</name>
+		<symbol>&#60;הכנס את זמן השתיקה כאן></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>אחרי אהה,מממ</name>
+		<symbol>&#60;המהום></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>אחרי אממ</name>
+		<symbol>&#60;ממלא></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>

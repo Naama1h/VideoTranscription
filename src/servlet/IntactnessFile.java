@@ -11,19 +11,19 @@ public class IntactnessFile {
 			return "missBeginning";
 		}
 		// check source of mp3
-		if (!lines[0].equals("@ מקור: " + source + "\r")) {
+		if (!lines[0].equals("@ מקור: " + source + "\r") && !lines[0].equals("@ מקור: " + source)) {
 			return "problemWithMp3";
 		}
 		// check beginning
-		if (!lines[1].equals("@ התחל:\r")) {
+		if (!lines[1].equals("@ התחל:\r") && !lines[1].equals("@ התחל:\r")) {
 			return "problemWithBeginning";
 		}
 		// check languish
-		if (!lines[2].equals("@ שפה: עב\r")) {
+		if (!lines[2].equals("@ שפה: עב\r") && !lines[2].equals("@ שפה: עב\r")) {
 			return "problemWithLanguage";
 		}
 		// check participants
-		if (!lines[3].equals("@ משתתפים:\tקל קליינט, מט מטפל\r")) {
+		if (!lines[3].equals("@ משתתפים:\tקל קליינט, מט מטפל\r") && !lines[3].equals("@ משתתפים:\tקל קליינט, מט מטפל")) {
 			return "problemWithParticipants";
 		}
 		// check the other lines

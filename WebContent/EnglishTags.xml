@@ -7,32 +7,44 @@
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>laugh</name>
-		<symbol>[!= laugh ]</symbol>
+		<name>common event</name>
+		<symbol>&#60;insert here></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>cry</name>
-		<symbol>[!= cry ]</symbol>
+		<name>laughter</name>
+		<symbol>&#60;צחוק></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>scream</name>
-		<symbol>[!= scream ]</symbol>
+		<name>crying</name>
+		<symbol>&#60;בכי></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>whisper</name>
-		<symbol>[!= whisper ]</symbol>
+		<name>squeak</name>
+		<symbol>&#60;צקצוק></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>sing</name>
-		<symbol>[!= sing ]</symbol>
+		<name>sigh</name>
+		<symbol>&#60;אנחה></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>body sounds</name>
+		<symbol>&#60;רעשי גוף></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>background noises</name>
+		<symbol>&#60;רעשי רקע></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
@@ -56,54 +68,119 @@
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>start fast talk</name>
-		<symbol>&gt;</symbol>
+		<name>start fast speech</name>
+		<symbol>&#60;מהר></symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>end fast talk</opentag>
+		<opentag>end fast speech</opentag>
 	</tag>
 	<tag>
-		<name>end fast talk</name>
-		<symbol>&lt;</symbol>
+		<name>end fast speech</name>
+		<symbol>&#60;סמהר></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>start slow talk</name>
-		<symbol>&lt;</symbol>
+		<name>start slowly speech</name>
+		<symbol>&#60;לאט></symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>end slow talk</opentag>
+		<opentag>end slowly speech</opentag>
 	</tag>
 	<tag>
-		<name>end slow talk</name>
-		<symbol>&gt;</symbol>
+		<name>end slowly speech</name>
+		<symbol>&#60;סלאט></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>start loud voice</name>
-		<symbol>^</symbol>
+		<name>start higher than usual</name>
+		<symbol>&#60;רם></symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>end loud voice</opentag>
+		<opentag>end higher than usual</opentag>
 	</tag>
 	<tag>
-		<name>end loud voice</name>
-		<symbol>^</symbol>
+		<name>end higher than usual</name>
+		<symbol>&#60;סרם></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>start low voice</name>
-		<symbol>v</symbol>
+		<name>start words that are shouted</name>
+		<symbol>&#60;צעקה></symbol>
 		<disable>false</disable>
 		<type>open</type>
-		<opentag>end low voice</opentag>
+		<opentag>end words that are shouted</opentag>
 	</tag>
 	<tag>
-		<name>end low voice</name>
-		<symbol>v</symbol>
+		<name>end words that are shouted</name>
+		<symbol>&#60;סצעקה></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>start lower than usual</name>
+		<symbol>&#60;חלש></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>end lower than usual</opentag>
+	</tag>
+	<tag>
+		<name>end lower than usual</name>
+		<symbol>&#60;סחלש></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>start use a different voice than normal</name>
+		<symbol>&#60;חיקוי></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>end use a different voice than normal</opentag>
+	</tag>
+	<tag>
+		<name>end use a different voice than normal</name>
+		<symbol>&#60;סחיקוי></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>start shaky / choking voice</name>
+		<symbol>&#60;רועד></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>end shaky / choking voice</opentag>
+	</tag>
+	<tag>
+		<name>end shaky / choking voice</name>
+		<symbol>&#60;סרועד></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>start cynicism</name>
+		<symbol>&#60;ציניות></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>end cynicism</opentag>
+	</tag>
+	<tag>
+		<name>end cynicism</name>
+		<symbol>&#60;סציניות></symbol>
+		<disable>true</disable>
+		<type>close</type>
+	</tag>
+	<tag>
+		<name>start humor</name>
+		<symbol>&#60;הומור></symbol>
+		<disable>false</disable>
+		<type>open</type>
+		<opentag>end humor</opentag>
+	</tag>
+	<tag>
+		<name>end humor</name>
+		<symbol>&#60;סהומור></symbol>
 		<disable>true</disable>
 		<type>close</type>
 	</tag>
@@ -121,20 +198,62 @@
 		<type>close</type>
 	</tag>
 	<tag>
-		<name>therapist</name>
-		<symbol>@th</symbol>
+		<name>therapist name</name>
+		<symbol>&#60;מט></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>client</name>
-		<symbol>@cl</symbol>
+		<name>patient's name</name>
+		<symbol>&#60;קל></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>
 	<tag>
-		<name>Nonverbal information</name>
-		<symbol>	:%</symbol>
+		<name>place name (Place code = Enclosed letters symbolizing space)</name>
+		<symbol>&#60;מקום Place_code></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>character name (character code = Enclosed letters symbolizing character)</name>
+		<symbol>&#60;דמות character_code></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>note or non-verbal information</name>
+		<symbol>%:	</symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+		<tag>
+		<name>silence for a few seconds</name>
+		<symbol>&#60;ש></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>long silence</name>
+		<symbol>&#60;שתיקה></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>silence for more then a minute</name>
+		<symbol>&#60;enter the silence time></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>after ahh,mm..</name>
+		<symbol>&#60;המהום></symbol>
+		<disable>false</disable>
+		<type>single</type>
+	</tag>
+	<tag>
+		<name>after amm..</name>
+		<symbol>&#60;ממלא></symbol>
 		<disable>false</disable>
 		<type>single</type>
 	</tag>

@@ -38,9 +38,9 @@ public class FRServlet extends HttpServlet {
 		//request.setCharacterEncoding("UTF-8");
 
 		String text = request.getParameter("transcriptionText");
-		FileReader fr = new FileReader();
+		FileReaderClass fr = new FileReaderClass();
 		IntactnessFile i = new IntactnessFile();
-		//fr.saveText(this.path, text, this.password);
+		fr.saveText(this.path, text, this.password);
 		//response.setContentType("text/plain");
 		//response.setCharacterEncoding("UTF-8");
 		String intactnessMessage = i.checkIntactness(text, this.mp3sourse);
@@ -55,7 +55,7 @@ public class FRServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String text;
-		FileReader fr = new FileReader();
+		FileReaderClass fr = new FileReaderClass();
 		//request.setCharacterEncoding("UTF-8");
 		this.path = request.getParameter("wordfile");
 		this.password = request.getParameter("password");
