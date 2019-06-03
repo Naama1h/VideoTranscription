@@ -23,9 +23,10 @@ function setData() {
 	xhttp.send();
 }
 
+setData();
+
 function checkIfButtonsAreExist() {
 	if (document.getElementById('0') != null) {
-	//document.write('here');
 		var i = 0;
 		while (document.getElementById(i) != null) {
 			var elem = document.getElementById(i);
@@ -85,7 +86,7 @@ function openXmlOfTags(xml) {
 				updateDisable("restartDisable", xmlDoc);
 			}
 		};
-		document.body.appendChild(b);
+		document.getElementById("buttons").appendChild(b);
 	}
 }
 
@@ -169,7 +170,7 @@ function updateDisable(element, xmlDoc) {
 	    	if (names[i].childNodes[0].nodeValue == element) {
 	    		document.getElementById(i).disabled = false;
 	    	} else {
-	       	document.getElementById(i).disabled = true;
+	    		document.getElementById(i).disabled = true;
 	    	}
 	    }
 	}
