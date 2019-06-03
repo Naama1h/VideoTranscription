@@ -28,24 +28,21 @@
 		</div>
 
 		<div id="AboutInformation" class="modal"
-			style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); background-color: #fefefe;">
+			style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 10%; top: 10%; width: 80%; height: 50%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); background-color: #FFF2F9; font-family: Verdana, Arial, Sans-Serif; color: #800040; text-align: center; right: 10%; border-top-width: thin; border-right-width: thin; border-bottom-width: thin; border-left-width: thin; border-right-style: none; border-left-style: none; border-bottom-style: none; border-top-style: none; border-bottom-color: #000000; border-left-color: #000000; border-top-color: #000000; border-right-color: #000000">
 			<div class="modal-content">
 				<span id="closeAbout" onclick="CloseAbout()" class="close">&times;</span>
 				<h2>About</h2>
-				<p id="AboutText"></p>
+				<p id="AboutText" style="color: #930049"></p>
+			</div>
+		</div><div id="UsageInstructions" class="modal2" style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 10%; top: 0px; width: 80%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); background-color: #EDE2EF; font-family: Verdana, Arial, Sans-Serif; color: #400040; right: 10%; cursor: hand; text-decoration: none">
+			<div class="modal-content2" style="margin: auto; padding: 20px; border: 1px solid #888; width: 80%;">
+				<span id="closeInstruction" onclick="CloseInstructions()" class="closeInstr" style="color: #aaaaaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
+					<h2><p align="center"><b>Usage Instructions</b></p></h2>
+				<p id="UsageInstructionsText" style="color: #472C4B; overflow: scroll; width: 100%; font-family: Verdana, Arial, Sans-Serif; height: 100%"></p>
 			</div>
 		</div> 
 		
-		<div id="UsageInstructions" class="modal2"
-			style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); background-color: #fefefe;">
-			<div class="modal-content2"
-				style="margin: auto; padding: 20px; border: 1px solid #888; width: 80%;">
-				<span id="closeInstruction" onclick="CloseInstructions()" class="closeInstr"
-					style="color: #aaaaaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
-					<h2>Usage Instructions</h2>
-				<p id="UsageInstructionsText"></p>
-			</div>
-		</div>
+		
 
 		<div align="left">
 			<p align="left">
@@ -65,7 +62,7 @@
 				</audio>
 			</div>
 			<div
-				style="width: 40%; float: right; background-color: #ffffcc; background-clip: padding-box; border-radius: 8px">
+				style="width: 496px; float: right; background-color: #ffffcc; background-clip: padding-box; border-radius: 8px">
 				<p>
 					<font
 						style="font-family: 'Trebuchet MS', Verdana, sans-serif; font-size: 14px; margin: 5px 5px 5px; text-align: center;">Please
@@ -104,20 +101,21 @@
 		<div>
 			<form action="FRServlet" method="get">
 				<textarea disabled rows="10" cols="2" id="transcriptionText"
-					name="transcriptionText" style="width: 100%; background-attachment: fixed">בחר הקלטה בכדי להתחיל</textarea>
-				<input type="submit" value="save" />
+					name="transcriptionText" style="width: 1272px; background-attachment: fixed">בחר הקלטה בכדי להתחיל</textarea>
+				<input type="submit" value="save">
 			</form>
 
+			<form id="uploadwordfile" action="FRServlet" method="post" style="width: 775px; ">
+				<input type="file" name="wordfile" id="wordfile">
+				<input type="text" name="password" id="password" placeholder="הכנס סיסמא">
+				<input type="hidden" name="mp3file" id="mp3file">
+				<input type="hidden" name="mp3fullfilename" id="mp3fullfilename" value="">
+				<input id="submitUploadWordFile" type="submit" value="open" disabled>
+			</form>
 			<!--  <div id="docRow" class="row top20 proBg">
                 <div class="col-lg-12">-->
 
-			<form id="uploadwordfile" action="FRServlet" method="post">
-				<input type="file" name="wordfile" id="wordfile" />
-				<input type="text" name="password" id="password" placeholder="הכנס סיסמא">
-				<input type="hidden" name="mp3file" id="mp3file" />
-				<input type="hidden" name="mp3fullfilename" id="mp3fullfilename" value="">
-				<input id="submitUploadWordFile" type="submit" value="open" disabled/>
-			</form>
+			
 
 			<input type="hidden" id="intactness" value=<%= request.getAttribute("intactnessMessage") %>>
 			<input type="hidden" id="chosenfilename" value=<%= request.getAttribute("fullname") %>>
