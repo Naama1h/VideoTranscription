@@ -1,7 +1,22 @@
 package servlet;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.DocumentBuilder;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
 public class IntactnessFile {
-	public String checkIntactness(String text, String source) {
+	public String checkIntactness(String text, String source, String language) {
 		if (text == null) {
 			return "missBeginning";
 		}
@@ -42,6 +57,10 @@ public class IntactnessFile {
 						&& !lines[i + 1].startsWith("*מט:    ") && !lines[i + 1].startsWith("*קל:    ")) {
 					return (i + 1) + "notStartWithPatientOrTherapist";
 				}
+				String problemWithTags = checkEndOfTags(lines[i + 1],language);
+				if (!problemWithTags.equals("")) {
+					return (i + 1) + problemWithTags;
+				}
 				i++;
 			}
 		}
@@ -67,5 +86,51 @@ public class IntactnessFile {
 			return false;
 		}
 		return true;
+	}
+
+	private String checkEndOfTags(String line, String language) {
+		if(line.contains("<מהר>") && !line.contains("<סמהר>")) {
+			return "notCloseTagOfSpeed";
+		}
+		if(line.contains("<לאט>") && !line.contains("<סלאט>")) {
+			return "notCloseTagOfSpeed";
+		}
+		if(line.contains("<רם>") && !line.contains("<סרם>")) {
+			return "notCloseTagOfLoudr";
+		}
+		if(line.contains("<צעקה>") && !line.contains("<סצעקה>")) {
+			return "notCloseTagOfYell";
+		}
+		if(line.contains("<חלש>") && !line.contains("<סחלש>")) {
+			return "notCloseTagOfWeak";
+		}
+		if(line.contains("<חיקוי>") && !line.contains("<סחיקוי>")) {
+			return "notCloseTagOfImitation";
+		}
+		if(line.contains("<רועד>") && !line.contains("<סרועד>")) {
+			return "notCloseTagOfShivering";
+		}
+		if(line.contains("<ציניות>") && !line.contains("<סציניות>")) {
+			return "notCloseTagOfCynicism";
+		}	
+		if(line.contains("<הומור>") && !line.contains("<סהומור>")) {
+			return "notCloseTagOfHumor";
+		}
+		String line1 = line.replaceAll("<", "");
+		String line2 = line.replaceAll(">", "");
+		if(line1.length() != line2.length()){
+			return "notCloseOrOpenTagOf<>";
+		}
+		String line3 = line.replaceAll("\\[", "");
+		String line4 = line.replaceAll("\\]", "");
+		if(line3.length() != line4.length()){
+			return "notCloseOrOpenTagOf[]";
+		}
+		String line5 = line.replaceAll("\\(", "");
+		String line6 = line.replaceAll("\\)", "");
+		if(line5.length() != line6.length()){
+			return "notCloseOrOpenTagOf()";
+		}
+		return "";
 	}
 }

@@ -38,12 +38,13 @@ public class FRServlet extends HttpServlet {
 		//request.setCharacterEncoding("UTF-8");
 
 		String text = request.getParameter("transcriptionText");
+		String lunguish = request.getParameter("lan");
 		FileReaderClass fr = new FileReaderClass();
 		IntactnessFile i = new IntactnessFile();
 		fr.saveText(this.path, text, this.password);
 		//response.setContentType("text/plain");
 		//response.setCharacterEncoding("UTF-8");
-		String intactnessMessage = i.checkIntactness(text, this.mp3sourse);
+		String intactnessMessage = i.checkIntactness(text, this.mp3sourse, lunguish);
 		request.setAttribute("intactnessMessage", intactnessMessage);
 		request.setAttribute("data", text);
 		request.setAttribute("fullname", this.fullName);

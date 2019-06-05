@@ -103,6 +103,7 @@
 				<form action="FRServlet" method="get">
 					<textarea disabled rows="10" cols="2" id="transcriptionText"
 						name="transcriptionText" style="hight:100%; width:100%; background-attachment: fixed">בחר הקלטה בכדי להתחיל</textarea>
+					<input type="hidden" name="lan" id="lan" value="">
 					<input type="submit" value="save">
 				</form>
 			</section>

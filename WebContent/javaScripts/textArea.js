@@ -15,10 +15,13 @@ function setData() {
 	};
 	if (document.getElementById('language').innerHTML == "עברית") {
 		xhttp.open("GET", "tags.xml", true);
+		document.getElementById("lan").value = "hebrue"
 	} else if (document.getElementById('language').innerHTML == "English") {
 		xhttp.open("GET", "EnglishTags.xml", true);
+		document.getElementById("lan").value = "english"
 	} else {
 		xhttp.open("GET", "tags.xml", true);
+		document.getElementById("lan").value = "hebrue"
 	}
 	xhttp.send();
 }
