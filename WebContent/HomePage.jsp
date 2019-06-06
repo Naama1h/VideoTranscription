@@ -55,8 +55,9 @@
 					style="" onclick="upload()">Load</button>
 				
 				<div align="right">
-					<audio style="float: center; width: 100%" id="audioF1" controls>
+					<audio style="float: center; width: 100%" id="audioF1" controls="controls">
 						<source src="" type="audio/mp3">
+						<source src="" type="audio/ogg">
 					</audio>
 				</div>
 		</section>

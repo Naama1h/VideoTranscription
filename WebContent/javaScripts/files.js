@@ -4,8 +4,8 @@ function upload() {
 			
 	var audio1=document.getElementById("audioF1");
 	var clone1=audio1.cloneNode(true);
-	var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
-	//var s = String(ChosenPath);
+	//var s = String(ChosenPath).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+	var s = String(ChosenPath);
 	clone1.setAttribute('src',s);
 	audio1.parentNode.replaceChild(clone1,audio1);
 
@@ -21,8 +21,8 @@ function setAudio(path) {
 	if (path != "null") {
 		var audioelem = document.getElementById("audioF1");
 		var cloneelem = audioelem.cloneNode(true);
-		var selem = String(path).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
-		//var selem = String(path);
+		//var selem = String(path).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
+		var selem = String(path);
 		cloneelem.setAttribute('src',selem);
 		audioelem.parentNode.replaceChild(cloneelem,audioelem);
 		document.getElementById("transcriptionText").disabled = false;
