@@ -35,47 +35,66 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STOnOff;
-
+/***
+ * File Reader Class
+ * @author User
+ *
+ */
 public class FileReaderClass {
-	
+	/***
+	 * get text from file
+	 * @param path the path of the word file
+	 * @param password the password to open him
+	 * @param mp3sourse the record source
+	 * @return the hole text from the word file
+	 */
 	public String getText(String path, String password, String mp3sourse) {
 		try {
+			// try to open the file if he have password
 			POIFSFileSystem filesystem = new POIFSFileSystem(new FileInputStream(path));
 			EncryptionInfo info = new EncryptionInfo(filesystem);
 			Decryptor d = Decryptor.getInstance(info);
 			if (!d.verifyPassword(password)) {
-			    throw new RuntimeException("Unable to process: document is encrypted");
+				// return to the user massage that this is wrong password
+				return "badPassword";
 			}
 			InputStream dataStream = d.getDataStream(filesystem);
 			XWPFDocument document = new XWPFDocument(dataStream);    
 			List<XWPFParagraph> paragraphs = document.getParagraphs();
+			// read the text
 	        String text = "";
 	        for (int i=0; i < paragraphs.size() ; i++) {
 	        	text = text + paragraphs.get(i).getText() + "\n";
 	        }
+	        // remove the "@ סיום"
 	        if (text.contains("@ סיום\n")) {
 	        	text = text.replaceAll("@ סיום\n", "");
 	        }
 	        filesystem.close();
 	        document.close();
+	        // add the start if this is an empty file
 	        if (text.equals("\n")) {
 	        	return "@ מקור: " + mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
 	        }
 	        return text;
 		} catch (org.apache.poi.poifs.filesystem.OfficeXmlFileException ex1) {
 			try {
+				// try to open the file if he haven't password
 				FileInputStream fis2 = new FileInputStream(path);
 				XWPFDocument xdoc2 = new XWPFDocument(OPCPackage.open(fis2));
 				List<XWPFParagraph> paragraphList = xdoc2.getParagraphs();
+				// read the text
 		        String text = "";
 		        for (int i=0; i < paragraphList.size() ; i++) {
 		        	text = text + paragraphList.get(i).getText() + "\n";
 		        }
 		        xdoc2.close();
 		        fis2.close();
+		        // remove the "@ סיום"
 		        if (text.contains("@ סיום\n")) {
 		        	text = text.replaceAll("@ סיום\n", "");
 		        }
+		        // add the start if this is an empty file
 		        if (text.equals("\n")) {
 		        	return "@ מקור: " + mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
 		        }
@@ -85,16 +104,25 @@ public class FileReaderClass {
 				return "badPath";
 			}
 		} catch (GeneralSecurityException ex) {
+			// return to the user massage that this is wrong password
 			return "badPassword";
 		} catch (org.apache.poi.EmptyFileException e1) {
 			e1.printStackTrace();
+			// add the start if this is an empty file
 			return "@ מקור: " + mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
 		} catch (Exception e) {
 			e.printStackTrace();
+			// return "badPath" if there is not exist word file with this path
 			return "badPath";
 		}
 	}
 
+	/***
+	 * save the text in word file with password
+	 * @param path the word file path
+	 * @param text the hole text
+	 * @param password the password
+	 */
 	public void saveText(String path, String text, String password) {
 		/*
         BufferedWriter writer = null;
@@ -125,12 +153,14 @@ public class FileReaderClass {
 			tmpRun.addCarriageReturn();
 			tmpRun.setFontSize(12);
 		}
+		// add the "סיום"
 		tmpRun.setText("@ סיום");
 		tmpRun.setFontFamily("Arial (גוף עברי)");
 		//setOrientation(tmpParagraph, TextOrientation.RTL);
 		//tmpRun.addCarriageReturn();
 		tmpRun.setFontSize(12);
 		try {
+			// write to the file
 			File file = new File(path);
 			FileOutputStream out = new FileOutputStream(file);
 			document.write(out);

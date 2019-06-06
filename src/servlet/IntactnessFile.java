@@ -1,21 +1,17 @@
 package servlet;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import java.io.File;
-import java.io.IOException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.*;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.DocumentBuilder;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
+/***
+ * Intactness File
+ * @author User
+ *
+ */
 public class IntactnessFile {
+	/***
+	 * check if there is problem in the text
+	 * @param text the hole text
+	 * @param source the record source
+	 * @param language the language
+	 * @return "" if good, else the problem
+	 */
 	public String checkIntactness(String text, String source, String language) {
 		if (text == null) {
 			return "missBeginning";
@@ -44,6 +40,9 @@ public class IntactnessFile {
 		// check the other lines
 		for (int i = 4; i<lines.length; i++) {
 			if (!lines[i].startsWith("%:") && !lines[i].isEmpty()) {
+				if (lines[i].startsWith("@ סיום")) {
+					return i + "notNeedToWriteTheEndTag";
+				}
 				if (lines.length < i) {
 					return i + "notInTheFormat";
 				}
@@ -67,6 +66,11 @@ public class IntactnessFile {
 		return "";
 	}
 	
+	/***
+	 * check if line in the time format
+	 * @param line the line
+	 * @return true if in format, else false
+	 */
 	private boolean timeFormat(String line) {
 		if (line.length() != 11) {
 			return false;
@@ -88,7 +92,14 @@ public class IntactnessFile {
 		return true;
 	}
 
+	/***
+	 * check if the tags ended
+	 * @param line the line to check
+	 * @param language the language
+	 * @return
+	 */
 	private String checkEndOfTags(String line, String language) {
+		// check the tags that have an end tag 
 		if(line.contains("<מהר>") && !line.contains("<סמהר>")) {
 			return "notCloseTagOfSpeed";
 		}
@@ -116,6 +127,7 @@ public class IntactnessFile {
 		if(line.contains("<הומור>") && !line.contains("<סהומור>")) {
 			return "notCloseTagOfHumor";
 		}
+		// check the number of the other tags of beginnings are like the endings 
 		String line1 = line.replaceAll("<", "");
 		String line2 = line.replaceAll(">", "");
 		if(line1.length() != line2.length()){
@@ -131,6 +143,7 @@ public class IntactnessFile {
 		if(line5.length() != line6.length()){
 			return "notCloseOrOpenTagOf()";
 		}
+		// if there is no problem
 		return "";
 	}
 }

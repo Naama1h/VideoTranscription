@@ -33,10 +33,12 @@ setAudio(document.getElementById("chosenfilename").value);
 			
 function uploudTestFromWordFile() {
     var text = document.getElementById('hiddenP').value;
-	if((text != "badPath") && (text != "null")) {
+	if((text != "badPath") && (text != "null") && (text != "badPassword")) {
 		document.getElementById('transcriptionText').value = text;
-	} else if(text != "null") {
-		alert('invalid file');
+	} else if((text != "badPath") && (text != "null")) {
+		alert('הסיסמא אינה חוקית');
+	} else if (text != "null") {
+		alert('הקובץ אינו חוקי');
 	}
 }
 var txt;

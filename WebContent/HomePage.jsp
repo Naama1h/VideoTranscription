@@ -43,7 +43,6 @@
 			</div>
 		</div> 
 	</header>
-		
 	<section style="float: left; margin-top: 10px; margin-right: 10px; margin-left: 10px;">
 		<section style="float: left; width: 45%; height: 300px;">
 				<p align="left">
