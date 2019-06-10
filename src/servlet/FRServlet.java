@@ -35,15 +35,11 @@ public class FRServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-8");
-
 		String text = request.getParameter("transcriptionText");
 		String lunguish = request.getParameter("lan");
 		FileReaderClass fr = new FileReaderClass();
 		IntactnessFile i = new IntactnessFile();
 		fr.saveText(this.path, text, this.password);
-		//response.setContentType("text/plain");
-		//response.setCharacterEncoding("UTF-8");
 		String intactnessMessage = i.checkIntactness(text, this.mp3sourse, lunguish);
 		request.setAttribute("intactnessMessage", intactnessMessage);
 		request.setAttribute("data", text);
@@ -57,7 +53,6 @@ public class FRServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String text;
 		FileReaderClass fr = new FileReaderClass();
-		//request.setCharacterEncoding("UTF-8");
 		this.path = request.getParameter("wordfile");
 		this.password = request.getParameter("password");
 		this.mp3sourse = request.getParameter("mp3file");
@@ -67,9 +62,7 @@ public class FRServlet extends HttpServlet {
 		} else {
 			text = "badPath";
 		}
-		
-//		response.setContentType("text/plain");
-//		response.setCharacterEncoding("UTF-8");
+
 		request.setAttribute("data", text);
 		request.setAttribute("fullname", this.fullName);
         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);

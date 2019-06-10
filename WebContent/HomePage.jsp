@@ -50,7 +50,7 @@
 						style="font-family: 'Trebuchet MS', Verdana, sans-serif; margin: 16px 16px 16px; color: #ff4411; font-size: 15px; padding-bottom: 10px;">Load
 						a video to transcript</font>
 				</p>
-				<input type="file" name="file" id="file" />
+				<input type="file" name="file" id="file" accept=".mp3"/>
 				<button type="submit" value="Upload" name="submit" id="submit"
 					style="" onclick="upload()">Load</button>
 				
@@ -109,7 +109,7 @@
 			</section>
 			<section style="float: center; width: 100%; height: 10%;">
 				<form id="uploadwordfile" action="FRServlet" method="post" style="width: 775px;">
-					<input type="file" name="wordfile" id="wordfile">
+					<input type="file" name="wordfile" id="wordfile" accept=".docx">
 					<input type="text" name="password" id="password" placeholder="הכנס סיסמא">
 					<input type="hidden" name="mp3file" id="mp3file">
 					<input type="hidden" name="mp3fullfilename" id="mp3fullfilename" value="">
