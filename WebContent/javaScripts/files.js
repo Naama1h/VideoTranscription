@@ -11,8 +11,8 @@ function upload() {
 	clone1.setAttribute('src',url);
 	audio1.parentNode.replaceChild(clone1,audio1);
 
-	var s2 = String(ChosenPath).split("\\")
-	s2 = s2[s2.length - 1]
+	var s2 = String(ChosenPath).split("\\");
+	s2 = s2[s2.length - 1];
 	document.getElementById("submitUploadWordFile").disabled = false;
 	document.getElementById("transcriptionText").disabled = false;
 	document.getElementById("mp3file").value = s2;
@@ -36,7 +36,7 @@ function setAudio(path) {
 
 setAudio(document.getElementById("chosenfilename").value);
 
-function uploudTestFromWordFile() {
+function uploudTextFromWordFile() {
     var text = document.getElementById('hiddenP').value;
 	if((text != "badPath") && (text != "null") && (text != "badPassword")) {
 		document.getElementById('transcriptionText').value = text;
@@ -48,4 +48,4 @@ function uploudTestFromWordFile() {
 }
 var txt;
 			
-uploudTestFromWordFile();
+uploudTextFromWordFile();

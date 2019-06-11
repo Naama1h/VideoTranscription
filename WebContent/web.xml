@@ -28,7 +28,6 @@
 		<servlet-name>FRServlet</servlet-name>
 		<url-pattern>/FRServlet</url-pattern>
 	</servlet-mapping>
-
 	<session-config>
 		<session-timeout>
 			30

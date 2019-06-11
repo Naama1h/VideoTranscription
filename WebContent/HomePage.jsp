@@ -44,10 +44,10 @@
 		</div> 
 	</header>
 	<section style="float: left; margin-top: 10px; margin-right: 10px; margin-left: 10px;">
-		<section style="float: left; width: 45%; height: 300px;">
+		<section style="float: left; width: 50%; height: 300px;">
 				<p align="left">
 					<font
-						style="font-family: 'Trebuchet MS', Verdana, sans-serif; margin: 16px 16px 16px; color: #ff4411; font-size: 15px; padding-bottom: 10px;">Load
+						style="font-family: 'Trebuchet MS', Verdana, sans-serif; margin: 16px 16px 16px; color: #000000; font-size: 15px; padding-bottom: 10px;">Load
 						a video to transcript</font>
 				</p>
 				<input type="file" name="file" id="file" accept=".mp3"/>
@@ -55,14 +55,14 @@
 					style="" onclick="upload()">Load</button>
 				
 				<div align="right">
-					<audio style="float: center; width: 100%" id="audioF1" controls="controls">
+					<audio style="float: center; width: 100%; height: 60px;" id="audioF1" controls="controls">
 						<source src="" type="audio/mp3">
 						<source src="" type="audio/ogg">
 					</audio>
 				</div>
 		</section>
-		<section style="float: right; width: 45%; height: 300px;">
-				<div style="float: right; background-color: #ffffcc; background-clip: padding-box; border-radius: 8px; text-align: center;">
+		<section style="float: right; width: 50%; height: 300px;">
+				<div style="float: right; width:80%; box-shadow: 3px 3px #cc8800; background-color: #ffffcc; background-clip: padding-box; border-radius: 8px; text-align: center; margin-left: 200px;">
 					<p>
 						<font style="font-family: 'Trebuchet MS', Verdana, sans-serif; font-size: 14px; margin: 5px 5px 5px; text-align: center;">Please
 							choose language for transcription, and insert names of client and
@@ -78,13 +78,13 @@
 						</form>
 					</div>
 					<div align="center">
-						<form style="width: 173px;">
+						<form style="width: 173px; float: center;">
 							<input type="text" id="therapist" name="therapist"
 								placeholder="insert the therapist's name"
-								style="float: inherit; width: 250px;">
+								style="float: center; width: 250px;">
 						    <input type="text"
 								id="client" name="client" placeholder="insert the client's name"
-								style="float: inherit; width: 250px;">
+								style="float: center; width: 250px;">
 						</form>
 					</div>
 					<div align="center">
@@ -98,16 +98,16 @@
 		</section>
 	</section>
 	<section style="float: left; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;">
-		<section style="float: left; width: 48%; height: 500px;">
+		<section style="float: left; width: 58%; height: 500px;">
 			<section style="float: center; width: 100%; height: 90%;">
 				<form action="FRServlet" method="get">
 					<textarea disabled rows="10" cols="2" id="transcriptionText"
-						name="transcriptionText" style="hight:100%; width:100%; background-attachment: fixed">בחר הקלטה בכדי להתחיל</textarea>
+						name="transcriptionText">בחר הקלטה בכדי להתחיל</textarea>
 					<input type="hidden" name="lan" id="lan" value="">
-					<input type="submit" value="save">
+					<input type="submit" value="save" style="margin-top: 5px;">
 				</form>
 			</section>
-			<section style="float: center; width: 100%; height: 10%;">
+			<section style="float: center; width: 100%; height: 10%; margin-top: 50px;">
 				<form id="uploadwordfile" action="FRServlet" method="post" style="width: 775px;">
 					<input type="file" name="wordfile" id="wordfile" accept=".docx">
 					<input type="text" name="password" id="password" placeholder="הכנס סיסמא">
@@ -118,7 +118,7 @@
 			</section>
 		</section>
 	
-		<section style="float: left; width: 48%; height: 500px;">
+		<section style="float: left; width: 38%; height: 500px;">
 			<div id="buttons"></div>
 		</section>
 	</section>
