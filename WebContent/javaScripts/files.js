@@ -26,11 +26,13 @@ function setAudio(path) {
 		//var selem = String(path).replace("C:\\Users\\User\\git\\VideoTranscription\\",'');
 		//var selem = URL.createObjectURL(path);
 		var fileelem = document.querySelector("input[type=file]").files[0];
-		var urlelem = URL.createObjectURL(fileelem);
-		cloneelem.setAttribute('src',urlelem);
-		audioelem.parentNode.replaceChild(cloneelem,audioelem);
-		document.getElementById("submitUploadWordFile").disabled = false;
-		document.getElementById("transcriptionText").disabled = false;
+		if (fileelem != null) {
+			var urlelem = URL.createObjectURL(fileelem);
+			cloneelem.setAttribute('src',urlelem);
+			audioelem.parentNode.replaceChild(cloneelem,audioelem);
+			document.getElementById("submitUploadWordFile").disabled = false;
+			document.getElementById("transcriptionText").disabled = false;
+		}
 	}
 }
 

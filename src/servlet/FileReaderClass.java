@@ -1,21 +1,16 @@
 package servlet;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-import org.apache.poi.common.usermodel.fonts.FontCharset;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackageAccess;
@@ -24,17 +19,12 @@ import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.crypt.EncryptionMode;
 import org.apache.poi.poifs.crypt.Encryptor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STOnOff;
+
 /***
  * File Reader Class
  * @author User
@@ -146,7 +136,7 @@ public class FileReaderClass {
 	    XWPFRun tmpRun = tmpParagraph.createRun();
 		String[] para = text.split("\n");
 		tmpRun.setFontFamily("Arial (גוף עברי)");
-		//tmpRun.setLang("HEBREW");
+		tmpRun.setLang("iw-IL");
 		//tmpRun.setFontFamily(FontCharset.HEBREW.name());
 		for (int i=0; i < para.length ; i++) {
 			tmpRun.setText(para[i]);
@@ -196,19 +186,7 @@ public class FileReaderClass {
 			e2.printStackTrace();
 		}
 	}
-	private enum TextOrientation {
-        LTR,
-        RTL
-    }
-	private static void setOrientation(XWPFParagraph par, TextOrientation orientation) {
-        if ( par.getCTP().getPPr()==null ) {
-            par.getCTP().addNewPPr();
-        }
-        if ( par.getCTP().getPPr().getBidi()==null ) {
-           par.getCTP().getPPr().addNewBidi();
-        }
-        par.getCTP().getPPr().getBidi().setVal(orientation==TextOrientation.RTL?STOnOff.ON:STOnOff.OFF);
-    }
+
 
 	public void convertTextToWord(String src,String des){
 		try{
@@ -232,7 +210,7 @@ public class FileReaderClass {
                 run.addBreak(); //add break
 		   }
            //check destination directory
-           File desdir;
+           //File desdir;
            //if(des.lastIndexOf('/')!=-1){
            //        desdir=new File(des.substring(0,des.lastIndexOf('/')));
            //        if(!desdir.exists())
