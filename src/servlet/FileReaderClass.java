@@ -1,13 +1,16 @@
 package servlet;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
@@ -23,7 +26,6 @@ import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STOnOff;
 
 /***
  * File Reader Class
@@ -114,11 +116,11 @@ public class FileReaderClass {
 	 * @param password the password
 	 */
 	public void saveText(String path, String text, String password) {
-		/*
+		// save the text in .txt file
         BufferedWriter writer = null;
         try {
-        	writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\User\\git\\VideoTranscription\\try.txt"), Charset.forName("UTF-8")));
-            writer.write(text);
+        	writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newPathToTxt(path)), Charset.forName("UTF-8")));
+            writer.write(text + "@ סיום");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -127,9 +129,11 @@ public class FileReaderClass {
             } catch (Exception e) {
             }
         }
-        convertTextToWord("C:\\Users\\User\\git\\VideoTranscription\\try.txt",path);
-		*/
-		// change the text in the file
+ 
+        convertTextToWord(newPathToTxt(path),path);
+        
+        /*
+		// save the text in .docx file
 		XWPFDocument document = new XWPFDocument();
 		XWPFParagraph tmpParagraph = document.createParagraph();
 		tmpParagraph.setAlignment(ParagraphAlignment.LEFT);
@@ -137,7 +141,6 @@ public class FileReaderClass {
 		String[] para = text.split("\n");
 		tmpRun.setFontFamily("Arial (גוף עברי)");
 		tmpRun.setLang("iw-IL");
-		//tmpRun.setFontFamily(FontCharset.HEBREW.name());
 		for (int i=0; i < para.length ; i++) {
 			tmpRun.setText(para[i]);
 			tmpRun.addCarriageReturn();
@@ -146,8 +149,6 @@ public class FileReaderClass {
 		// add the "סיום"
 		tmpRun.setText("@ סיום");
 		tmpRun.setFontFamily("Arial (גוף עברי)");
-		//setOrientation(tmpParagraph, TextOrientation.RTL);
-		//tmpRun.addCarriageReturn();
 		tmpRun.setFontSize(12);
 		try {
 			// write to the file
@@ -161,6 +162,8 @@ public class FileReaderClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
+		
 		// encryption with password
 		try (POIFSFileSystem fs = new POIFSFileSystem()) {
   			EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
@@ -187,6 +190,10 @@ public class FileReaderClass {
 		}
 	}
 
+	
+	public String newPathToTxt(String path) {
+		return path.replace(".docx", ".txt");
+	}
 
 	public void convertTextToWord(String src,String des){
 		try{
@@ -196,28 +203,26 @@ public class FileReaderClass {
                     System.out.println("Source not found");
                     System.exit(-1);
             }
-            FileReader fr=new FileReader(sourcefile); //create file reader
-            BufferedReader br=new BufferedReader(fr); //wrap file reader in BufferedReader
+            BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(sourcefile), Charset.forName("UTF-8"))); //wrap file reader in BufferedReader
             //so the reader can read the text by line
             XWPFDocument docx=new XWPFDocument(); //create document for ms word 2007+
             String text="";
+            XWPFParagraph pa=docx.createParagraph(); //create paragraph in the document
+            pa.setAlignment(ParagraphAlignment.RIGHT);
+            XWPFRun run=pa.createRun(); //create run object in the paragraph
+            run.setFontFamily("Arial"); //set the font name of the text to be written
+            run.setFontSize(12); //set the font size of the text to be writtten
             while((text=br.readLine())!=null){
-            	XWPFParagraph pa=docx.createParagraph(); //create paragraph in the document
-                XWPFRun run=pa.createRun(); //create run object in the paragraph
-                run.setFontFamily("Arial"); //set the font name of the text to be written
-                run.setFontSize(12); //set the font size of the text to be writtten
-                run.setText(text);//add text to paragraph
-                run.addBreak(); //add break
-		   }
-           //check destination directory
-           //File desdir;
-           //if(des.lastIndexOf('/')!=-1){
-           //        desdir=new File(des.substring(0,des.lastIndexOf('/')));
-           //        if(!desdir.exists())
-           //                desdir.mkdirs(); //create destination directory
-           //}
-           docx.write(new FileOutputStream(new File(des))); //write the content of the document to the output file
-		   br.close();
+            	run.setText(text);
+            	run.addCarriageReturn();
+		    }
+            //write the content of the document to the output file
+         	File file = new File(des);
+         	FileOutputStream out = new FileOutputStream(file);
+         	docx.write(out);
+         	docx.close();
+         	out.close();
+         	br.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

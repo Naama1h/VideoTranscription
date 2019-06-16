@@ -14,16 +14,16 @@ public class IntactnessFile {
 	 */
 	public String checkIntactness(String text, String source, String language) {
 		if (text == null) {
-			return "missBeginning";
+			return "missBeginning#" + source;
 		}
 		String[] lines = text.split("\n");
 		// check the file start
 		if (lines.length < 4) {
-			return "missBeginning";
+			return "missBeginning#" + source;
 		}
 		// check source of mp3
 		if (!lines[0].equals("@ מקור: " + source + "\r") && !lines[0].equals("@ מקור: " + source)) {
-			return "problemWithMp3";
+			return "problemWithMp3#" + source;
 		}
 		// check beginning
 		if (!lines[1].equals("@ התחל:\r") && !lines[1].equals("@ התחל:\r")) {

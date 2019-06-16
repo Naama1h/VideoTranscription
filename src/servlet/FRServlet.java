@@ -26,7 +26,6 @@ public class FRServlet extends HttpServlet {
     public FRServlet() {
         super();
     }
-	private static final String thisPath="C:\\Users\\naama\\workspace\\VideoTranscription";
 	private String path = "";
 	private String password = "";
 	private String mp3sourse = "";
@@ -62,7 +61,6 @@ public class FRServlet extends HttpServlet {
 		} else {
 			text = "badPath";
 		}
-
 		request.setAttribute("data", text);
 		request.setAttribute("fullname", this.fullName);
         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
