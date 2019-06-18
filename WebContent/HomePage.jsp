@@ -131,7 +131,7 @@
 		<script type="text/javascript" src="javaScripts/files.js"></script>
 		<script type="text/javascript" src="javaScripts/modals.js"></script>
 		<script type="text/javascript" src="javaScripts/textArea.js"></script>
-		<script type="text/javascript" src="javaScripts/alertIntactness.js"/></script>
+		<script type="text/javascript" src="javaScripts/alertIntactness.js"></script>
 	</section>
 </body>
 </html>
