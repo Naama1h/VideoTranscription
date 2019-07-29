@@ -30,6 +30,8 @@ public class FRServlet extends HttpServlet {
 	private String password = "";
 	private String mp3sourse = "";
 	private String fullName = "";
+	// offline the read and write to word file for now
+	private boolean offline = true;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -38,7 +40,10 @@ public class FRServlet extends HttpServlet {
 		String lunguish = request.getParameter("lan");
 		FileReaderClass fr = new FileReaderClass();
 		IntactnessFile i = new IntactnessFile();
-		fr.saveText(this.path, text, this.password);
+		// offline the read and write to word file
+		if (!this.offline) {
+			fr.saveText(this.path, text, this.password);
+		}
 		String intactnessMessage = i.checkIntactness(text, this.mp3sourse, lunguish);
 		request.setAttribute("intactnessMessage", intactnessMessage);
 		request.setAttribute("data", text);
@@ -56,10 +61,15 @@ public class FRServlet extends HttpServlet {
 		this.password = request.getParameter("password");
 		this.mp3sourse = request.getParameter("mp3file");
 		this.fullName = request.getParameter("mp3fullfilename");
-		if (this.path != null) {
-			text = fr.getText(this.path,this.password,this.mp3sourse);
+		// offline the read and write to word file
+		if (this.offline) {
+			text = "@ מקור: " + this.mp3sourse + "\n@ התחל:\n@ שפה: עב\n@ משתתפים:\tקל קליינט, מט מטפל\n";
 		} else {
-			text = "badPath";
+			if (this.path != null) {
+				text = fr.getText(this.path,this.password,this.mp3sourse);
+			} else {
+				text = "badPath";
+			}
 		}
 		request.setAttribute("data", text);
 		request.setAttribute("fullname", this.fullName);

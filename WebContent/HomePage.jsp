@@ -109,8 +109,8 @@
 			</section>
 			<section style="float: center; width: 100%; height: 10%; margin-top: 50px;">
 				<form id="uploadwordfile" action="FRServlet" method="post" style="width: 775px;">
-					<input type="file" name="wordfile" id="wordfile" accept=".docx">
-					<input type="text" name="password" id="password" placeholder="הכנס סיסמא">
+					<input disabled type="file" name="wordfile" id="wordfile" accept=".docx">
+					<input disabled type="text" name="password" id="password" placeholder="הכנס סיסמא">
 					<input type="hidden" name="mp3file" id="mp3file">
 					<input type="hidden" name="mp3fullfilename" id="mp3fullfilename" value="">
 					<input id="submitUploadWordFile" type="submit" value="open" disabled>
